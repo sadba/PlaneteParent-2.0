@@ -58,7 +58,8 @@ public class EnfantActivity extends AppCompatActivity {
         if (isNetworkAvailable()){
             SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
             String ien = sharedPreferences.getString("ien_Parent", "");
-            api.getEnfants(ien)
+            Toast.makeText(getApplicationContext(), ien,Toast.LENGTH_LONG).show();
+            api.getEnfants("1642PSLK")
                     .subscribeOn(Schedulers.io())
                     .observeOn(Schedulers.computation())
                     .map(enfant ->{

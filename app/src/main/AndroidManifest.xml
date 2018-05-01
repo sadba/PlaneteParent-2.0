@@ -27,7 +27,11 @@
             android:theme="@style/AppTheme" />
         <activity android:name=".VerifActivity" />
         <activity android:name=".EnfantActivity" />
-        <activity android:name=".MenuActivity"></activity>
+        <activity android:name=".MenuActivity" />
+        <activity android:name=".EmploiActivity" />
+        <activity android:name=".NoteActivity" />
+        <activity android:name=".EvalActivity" />
+        <activity android:name=".InfoEtabActivity"></activity>
     </application>
 
 </manifest>

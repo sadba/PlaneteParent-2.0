@@ -10,6 +10,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.lab.sadba.loginparent.EnfantActivity;
+import com.lab.sadba.loginparent.HomeActivity;
 import com.lab.sadba.loginparent.MenuActivity;
 import com.lab.sadba.loginparent.Model.Enfant;
 import com.lab.sadba.loginparent.R;
@@ -45,7 +46,7 @@ public class EnfantAdapter extends RecyclerView.Adapter<EnfantAdapter.EnfantView
             @Override
             public void onClick(View v) {
                 //context.startActivity(new Intent(EnfantActivity.this, MenuActivity.class));
-                Intent intent = new Intent(context, MenuActivity.class);
+                Intent intent = new Intent(context, HomeActivity.class);
                 context.startActivity(intent);
 
             }
