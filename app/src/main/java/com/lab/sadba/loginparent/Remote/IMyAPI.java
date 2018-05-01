@@ -1,0 +1,43 @@
+package com.lab.sadba.loginparent.Remote;
+
+import com.lab.sadba.loginparent.Model.Enfant;
+import com.lab.sadba.loginparent.Model.PostRegisterUser;
+import com.lab.sadba.loginparent.Model.PostUser;
+import com.lab.sadba.loginparent.Model.PostVerifUser;
+import com.lab.sadba.loginparent.Model.RegisterUser;
+import com.lab.sadba.loginparent.Model.User;
+import com.lab.sadba.loginparent.Model.VerifUser;
+
+import java.util.List;
+
+import io.reactivex.Observable;
+import retrofit2.Call;
+import retrofit2.http.Body;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
+import retrofit2.http.Headers;
+import retrofit2.http.POST;
+import retrofit2.http.Query;
+
+public interface IMyAPI {
+
+    @Headers("Content-type: application/json")
+    @POST("auth_parent")
+    Call<User> loginUser(@Body PostUser postUser);
+
+    @Headers("Content-type: application/json")
+    @POST("verif_parent")
+    Call<VerifUser> verifUser(@Body PostVerifUser postVerifUser);
+
+    @Headers("Content-type: application/json")
+    @POST("save_parent")
+    Call<RegisterUser> registerUser(@Body PostRegisterUser postRegisterUser);
+
+    /*@Headers("Content-type: application/json")
+    @GET("enfants")
+    Call<List<Enfant>> getEnfants(@Query("ien") String ien);*/
+
+    @GET("enfants")
+    Observable<List<Enfant>> getEnfants(@Query("ien") String ien);
+}
