@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void gotToHomeActivity() {
-        Intent i = new Intent(this, HomeActivity.class);
+        Intent i = new Intent(this, EnfantActivity.class);
         startActivity(i);
     }
 
@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
                         if (result.getCode().equals("1")) {
                             Toast.makeText(MainActivity.this, result.getMessage(), Toast.LENGTH_LONG).show();
                         } else {
-                            startActivity(new Intent(MainActivity.this, EnfantActivity.class));
+                            //startActivity(new Intent(MainActivity.this, EnfantActivity.class));
 
                             gotToHomeActivity();
                             sp.edit().putBoolean("logged", true).apply();
