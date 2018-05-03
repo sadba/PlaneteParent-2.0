@@ -18,6 +18,7 @@ import com.lab.sadba.loginparent.Model.PostUser;
 import com.lab.sadba.loginparent.Model.User;
 import com.lab.sadba.loginparent.Remote.IMyAPI;
 
+import io.realm.Realm;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -30,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     SharedPreferences sp;
     SharedPreferences sp1;
     IMyAPI mService;
+    Realm realm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,17 +41,19 @@ public class MainActivity extends AppCompatActivity {
         //Init Service
         mService = Common.getAPI();
 
+        Realm.init(this);
+
         //Init View
         txt_verif = findViewById(R.id.txt_verif);
         edt_ien = findViewById(R.id.edt_ien);
         edt_password = findViewById(R.id.edt_password);
         btn_login = findViewById(R.id.btn_login);
 
-        User user = new User();
+        /*User user = new User();
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString("ien_Parent", user.getIen());
-        editor.apply();
+        editor.apply();*/
 
         sp = getSharedPreferences("btn_login", MODE_PRIVATE);
         sp1 = getSharedPreferences("ien_parent", MODE_PRIVATE);
@@ -100,6 +104,7 @@ public class MainActivity extends AppCompatActivity {
                 .enqueue(new Callback<User>() {
                     @Override
                     public void onResponse(Call<User> call, Response<User> response) {
+
                         User result = response.body();
                         if (result.getCode().equals("1")) {
                             Toast.makeText(MainActivity.this, result.getMessage(), Toast.LENGTH_LONG).show();
@@ -108,9 +113,12 @@ public class MainActivity extends AppCompatActivity {
 
                             gotToHomeActivity();
                             sp.edit().putBoolean("logged", true).apply();
-                            sp1.edit().putString("ien_parent", "").apply();
-                            Intent i = new Intent(getApplicationContext(), EnfantActivity.class);
-                            startActivity(i);
+                            //sp1.edit().putString("ien_parent", "").apply();
+                            realm = Realm.getDefaultInstance();
+                            realm.beginTransaction();
+                            realm.copyToRealm(response.body());
+                            realm.commitTransaction();
+
                         }
 
 

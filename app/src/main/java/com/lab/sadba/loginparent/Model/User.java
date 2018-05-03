@@ -3,7 +3,9 @@ package com.lab.sadba.loginparent.Model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class User {
+import io.realm.RealmObject;
+
+public class User extends RealmObject{
 
     @SerializedName("code")
     @Expose
@@ -38,7 +40,7 @@ public class User {
         return ien;
     }
 
-    public void setIen(String ien_parent) {
+    public void setIen(String ien) {
         this.ien = ien;
     }
 }
