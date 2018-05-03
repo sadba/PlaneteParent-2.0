@@ -11,6 +11,9 @@ public class User {
     @SerializedName("message")
     @Expose
     private String message;
+    @SerializedName("ien")
+    @Expose
+    private String ien;
 
     public User() {
     }
@@ -29,5 +32,13 @@ public class User {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public String getIen() {
+        return ien;
+    }
+
+    public void setIen(String ien_parent) {
+        this.ien = ien;
     }
 }

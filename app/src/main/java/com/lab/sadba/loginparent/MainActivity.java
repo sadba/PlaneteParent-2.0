@@ -1,7 +1,9 @@
 package com.lab.sadba.loginparent;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -26,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     EditText edt_ien, edt_password;
     Button btn_login;
     SharedPreferences sp;
+    SharedPreferences sp1;
     IMyAPI mService;
 
     @Override
@@ -42,7 +45,14 @@ public class MainActivity extends AppCompatActivity {
         edt_password = findViewById(R.id.edt_password);
         btn_login = findViewById(R.id.btn_login);
 
+        User user = new User();
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("ien_Parent", user.getIen());
+        editor.apply();
+
         sp = getSharedPreferences("btn_login", MODE_PRIVATE);
+        sp1 = getSharedPreferences("ien_parent", MODE_PRIVATE);
 
         if (sp.getBoolean("logged", false)){
             gotToHomeActivity();
@@ -81,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+
     private void authenticateUser(String ien, String password) {
         PostUser postUser = new PostUser();
         postUser.setPassword(password);
@@ -97,6 +108,9 @@ public class MainActivity extends AppCompatActivity {
 
                             gotToHomeActivity();
                             sp.edit().putBoolean("logged", true).apply();
+                            sp1.edit().putString("ien_parent", "").apply();
+                            Intent i = new Intent(getApplicationContext(), EnfantActivity.class);
+                            startActivity(i);
                         }
 
 
