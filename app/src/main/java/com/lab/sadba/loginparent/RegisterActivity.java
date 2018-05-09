@@ -56,7 +56,7 @@ public class RegisterActivity extends AppCompatActivity {
         txt_sign_in.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                startActivity(new Intent(RegisterActivity.this, MainActivity.class));
             }
         });
 

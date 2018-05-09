@@ -8,4 +8,6 @@
     <color name="yellow">#FFA000</color>
     <color name="green">#00bfa5</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="tabtextcolor">#fff</color>
+    <color name="tabindicatorcolor">#2d2d2d</color>
 </resources>

@@ -1,6 +1,7 @@
 package com.lab.sadba.loginparent;
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
@@ -12,7 +13,9 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.lab.sadba.loginparent.Adapter.EnfantAdapter;
 import com.lab.sadba.loginparent.Model.Enfant;
@@ -23,6 +26,7 @@ import com.lab.sadba.loginparent.Remote.IMyAPI;
 import com.lab.sadba.loginparent.Remote.RetrofitClient;
 import io.reactivex.Observable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -37,12 +41,15 @@ public class EnfantActivity extends AppCompatActivity {
 
     private RecyclerView recyclerEnfant;
     private Realm realm;
-
+    ProgressDialog progressDoalog;
     @SuppressLint("CheckResult")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enfant);
+        progressDoalog = new ProgressDialog(EnfantActivity.this);
+        progressDoalog.setMessage("Chargement des donnees...");
+        progressDoalog.show();
         initUI();
         Realm.init(getApplicationContext());
         realm = Realm.getDefaultInstance();
@@ -50,13 +57,12 @@ public class EnfantActivity extends AppCompatActivity {
                 .getIMyAPI();
 
         User user = realm.where(User.class).findFirst();
-        Toast.makeText(this, user.getIen(), Toast.LENGTH_SHORT).show();
-
 
         Enfant enf = new Enfant();
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString("ien_Enfant", enf.getIen_eleve());
+        editor.putString("code_etab", enf.getId_etablissement());
         editor.apply();
 
         Observable<List<Enfant>> dbObservable =  Observable.create(e -> getDBEnfants());
@@ -67,9 +73,21 @@ public class EnfantActivity extends AppCompatActivity {
                     .observeOn(Schedulers.computation())
                     .map(enfants ->{
                         Realm realm = Realm.getDefaultInstance();
-                        realm.executeTransaction(trRealm->trRealm.copyToRealm(enfants));
-                        Log.d("ooo",realm.where(Enfant.class).findAll().size()+"");
+                        List<Enfant> results = realm.where(Enfant.class).findAll();
+                        List<String> ien_eleve = new ArrayList<>();
+                        for (Enfant t: results) {
+                            ien_eleve.add(t.getIen_eleve());
+                        }
+                        for (Enfant t2: enfants) {
+                            if (!ien_eleve.contains(t2.getIen_eleve())){
+                                realm.executeTransaction(trRealm->trRealm.copyToRealmOrUpdate(enfants));
+                                Log.d("ooo",realm.where(Enfant.class).findAll().size()+"");
+                            }
+
+                        }
                         return enfants;
+
+
 
             })
                     .mergeWith(dbObservable)
@@ -78,6 +96,7 @@ public class EnfantActivity extends AppCompatActivity {
         } else {
             setAdapterData(getDBEnfants());
         }
+
 
     }
 
@@ -91,6 +110,7 @@ public class EnfantActivity extends AppCompatActivity {
     }
 
     void setAdapterData(List<Enfant> enfants){
+        progressDoalog.dismiss();
         EnfantAdapter adapter = new EnfantAdapter(getApplicationContext(), enfants);
         recyclerEnfant.setLayoutManager(new LinearLayoutManager(this));
         recyclerEnfant.setItemAnimator(new DefaultItemAnimator());

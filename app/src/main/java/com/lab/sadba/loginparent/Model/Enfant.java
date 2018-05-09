@@ -16,6 +16,7 @@ public class Enfant extends RealmObject{
     @SerializedName("message")
     @Expose
     private String message;
+    @PrimaryKey
     @SerializedName("ien_eleve")
     @Expose
     private String ien_eleve;

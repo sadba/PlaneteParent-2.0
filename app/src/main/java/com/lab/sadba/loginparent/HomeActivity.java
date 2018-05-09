@@ -3,6 +3,7 @@ package com.lab.sadba.loginparent;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,9 +13,10 @@ import android.widget.Toolbar;
 
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener{
 
-    Toolbar toolbar;
+    android.support.v7.widget.Toolbar toolbar;
     private CardView tempsCard, notesCard, evalCard, infosCard;
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @SuppressLint("CutPasteId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,15 +34,9 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         evalCard.setOnClickListener(this);
         infosCard.setOnClickListener(this);
 
-       /* toolbar =  findViewById(R.id.toolbar);
-       // setSupportActionBar(toolbar);
-        ActionBar actionBar = getSupportActionBar();
-        assert actionBar != null;
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setTitle("Dashboard");
-        *//*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            toolbar.setTitle("Dashboard");
-        }*/
+        toolbar =  findViewById(R.id.toolbar);
+        toolbar.setTitle("Dashboard");
+
     }
 
     @Override

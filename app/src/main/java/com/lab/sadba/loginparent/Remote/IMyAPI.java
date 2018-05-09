@@ -1,6 +1,8 @@
 package com.lab.sadba.loginparent.Remote;
 
 import com.lab.sadba.loginparent.Model.Enfant;
+import com.lab.sadba.loginparent.Model.Evaluation;
+import com.lab.sadba.loginparent.Model.InfoEtab;
 import com.lab.sadba.loginparent.Model.PostRegisterUser;
 import com.lab.sadba.loginparent.Model.PostUser;
 import com.lab.sadba.loginparent.Model.PostVerifUser;
@@ -40,4 +42,10 @@ public interface IMyAPI {
 
     @GET("enfants")
     Observable<List<Enfant>> getEnfants(@Query("ien") String ien);
+
+    @GET("evaluation-eleve/index.php")
+    Observable<List<Evaluation>> getEval(@Query("ien") String ien);
+
+    @GET("etab_by_code_structure")
+    Call<InfoEtab> getInfos(@Query("code") String code);
 }

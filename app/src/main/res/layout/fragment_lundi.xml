@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:id="@+id/parent_layout">
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
 
     <android.support.v7.widget.CardView
-        android:layout_margin="10dp"
+        android:layout_margin="8dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         app:cardCornerRadius="2dp"
         app:cardElevation="10dp"
         >
@@ -24,22 +26,20 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <TextView
-                    android:textStyle="italic"
-                    android:textColor="@color/colorPrimary"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
-                    android:text="Prenom :"
-                    />
-                <TextView
-                    android:fontFamily="cursive"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="25sp"
                     android:textStyle="bold"
-                    android:text="Prenom"
+                    android:text="Cours :"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:text="Mathematiques"
                     android:layout_marginLeft="20dp"
-                    android:id="@+id/txt_prenom"
+                    android:id="@+id/libelle_discipline_id"
 
                     />
 
@@ -50,21 +50,19 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <TextView
-                    android:textColor="@color/colorPrimary"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="16sp"
                     android:textStyle="italic"
-                    android:text="Nom :"
+                    android:text="Heure debut :"
                     />
                 <TextView
-                    android:fontFamily="cursive"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="25sp"
+                    android:textSize="16sp"
                     android:textStyle="italic"
-                    android:id="@+id/txt_nom"
-                    android:text="Nom"
+                    android:id="@+id/heure_debut_id"
+                    android:text="Heure debut"
                     android:layout_marginLeft="20dp"
                     />
 
@@ -75,22 +73,20 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <TextView
-                    android:textColor="@color/colorPrimary"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="16sp"
                     android:textStyle="italic"
-                    android:text="Classe :"
+                    android:text="Heure fin :"
                     />
 
                 <TextView
-                    android:fontFamily="cursive"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="16sp"
                     android:textStyle="italic"
-                    android:id="@+id/txt_classe"
-                    android:text="Classe"
+                    android:id="@+id/heure_fin_id"
+                    android:text="Heure fin"
                     android:layout_marginLeft="20dp"
                     />
 
@@ -100,20 +96,18 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <TextView
-                    android:textColor="@color/colorPrimary"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="16sp"
                     android:textStyle="italic"
-                    android:text="Etablissement :"
+                    android:text="Salle :"
                     />
                 <TextView
-                    android:fontFamily="cursive"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="16sp"
                     android:textStyle="italic"
-                    android:id="@+id/txt_etab"
+                    android:id="@+id/salle_id"
                     android:text="Salle"
                     android:layout_marginLeft="20dp"
                     />
