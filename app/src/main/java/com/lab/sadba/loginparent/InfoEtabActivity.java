@@ -33,87 +33,44 @@ public class InfoEtabActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info_etab);
 
-        //Init Service
         mService = Common2.getAPI();
-
-        Realm.init(this);
+        Realm.init(getApplicationContext());
         realm = Realm.getDefaultInstance();
-        Enfant enfant = realm.where(Enfant.class).findFirst();
+        String ien = getIntent().getStringExtra("ien_bis");
+        Enfant enfant = realm.where(Enfant.class).equalTo("ien_eleve", ien).findFirst();
         String code = enfant.getId_etablissement();
-
-
-        /*SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        String code_etab = preferences.getString("code_etab", "");*/
-        Toast.makeText(this, code, Toast.LENGTH_SHORT).show();
 
         tel = findViewById(R.id.tel);
         cycle = findViewById(R.id.libelle_nom_cycle);
         etab = findViewById(R.id.libelle_etab);
 
-        mService.getInfos(code)
-                .enqueue(new Callback<InfoEtab>() {
-                    @Override
-                    public void onResponse(Call<InfoEtab> call, Response<InfoEtab> response) {
-
-                       /* InfoEtab info = null;
-                        if (response.code() == 200) {
-                            info = new InfoEtab();
-                            realm = Realm.getDefaultInstance();
-                            InfoEtab inf = realm.where(InfoEtab.class).findFirst();
-                            tel.setText(inf.getTel_chef_struct());
-                            cycle.setText(inf.getLibelle_type_systeme_ens());
-                            etab.setText(inf.getNom_struct());
-                        }
-
-
-                            *//*tel.setText(result.getTel_chef_struct());
-                            cycle.setText(result.getLibelle_type_systeme_ens());
-                            etab.setText(result.getNom_struct());*//*
-
-                        realm.beginTransaction();
-                        realm.copyToRealmOrUpdate(info);
-                        realm.commitTransaction();
-                    }
-*/
-                    }
-                    @Override
-                    public void onFailure(Call<InfoEtab> call, Throwable t) {
-                        Toast.makeText(InfoEtabActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                });
-
-        //getInfosEtab(code);
+        infos(code);
 
 
     }
-}
 
-   /* private void getInfosEtab(String code) {
+    private void infos(String code) {
         mService.getInfos(code)
                 .enqueue(new Callback<InfoEtab>() {
                     @Override
                     public void onResponse(Call<InfoEtab> call, Response<InfoEtab> response) {
+                        Toast.makeText(InfoEtabActivity.this, code, Toast.LENGTH_SHORT).show();
 
 
-                        realm = Realm.getDefaultInstance();
-                        InfoEtab inf = realm.where(InfoEtab.class).findFirst();
-                        tel.setText(inf.getTel_chef_struct());
-                        cycle.setText(inf.getLibelle_type_systeme_ens());
-                        etab.setText(inf.getNom_struct());
-
-                            *//*tel.setText(result.getTel_chef_struct());
-                            cycle.setText(result.getLibelle_type_systeme_ens());
-                            etab.setText(result.getNom_struct());*//*
-
-                           *//* realm.beginTransaction();
-                            realm.copyToRealmOrUpdate(infoEtab);
-                            realm.commitTransaction();*//*
+                        if (response.body() != null) {
+                            etab.setText(response.body().getNom_struct());
+                            cycle.setText(response.body().getLibelle_type_systeme_ens());
+                            tel.setText(response.body().getTel_chef_struct());
                         }
-
+                    }
 
                     @Override
                     public void onFailure(Call<InfoEtab> call, Throwable t) {
-                        Toast.makeText(InfoEtabActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+
                     }
-                });*/
+                });
+    }
+}
+
+
 

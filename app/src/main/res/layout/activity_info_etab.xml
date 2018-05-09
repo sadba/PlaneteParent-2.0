@@ -68,7 +68,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_toRightOf="@+id/image_cycle"
-                android:text="Cycle : "
+                android:text="Cycle "
                 android:textSize="24sp" />
             <TextView
                 android:id="@+id/libelle_nom_cycle"

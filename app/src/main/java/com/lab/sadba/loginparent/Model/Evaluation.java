@@ -6,10 +6,11 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
 public class Evaluation extends RealmObject{
 
-
+    @PrimaryKey
     @SerializedName("id_eval")
     @Expose
     private String id_eval;

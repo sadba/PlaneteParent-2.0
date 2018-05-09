@@ -13,6 +13,7 @@ import android.widget.Toolbar;
 
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener{
 
+    private String ien;
     android.support.v7.widget.Toolbar toolbar;
     private CardView tempsCard, notesCard, evalCard, infosCard;
 
@@ -37,6 +38,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         toolbar =  findViewById(R.id.toolbar);
         toolbar.setTitle("Dashboard");
 
+         ien = getIntent().getStringExtra("ien_enfant");
+
     }
 
     @Override
@@ -44,10 +47,28 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         Intent i;
 
         switch (v.getId()){
-            case R.id.temps_card : i = new Intent(this, EmploiActivity.class);startActivity(i); break;
-            case R.id.notes_card : i = new Intent(this, NoteActivity.class);startActivity(i); break;
-            case R.id.eval_card : i = new Intent(this, EvalActivity.class);startActivity(i); break;
-            case R.id.infos_card : i = new Intent(this, InfoEtabActivity.class);startActivity(i); break;
+            case R.id.temps_card :
+                i = new Intent(this, EmploiActivity.class);
+                i.putExtra("ien_bis", ien);
+                startActivity(i);
+            break;
+
+            case R.id.notes_card : i =
+                    new Intent(this, NoteActivity.class);
+                    i.putExtra("ien_bis", ien);
+                    startActivity(i);
+                    break;
+
+            case R.id.eval_card : i =
+                    new Intent(this, EvalActivity.class);
+                    i.putExtra("ien_bis", ien);
+                    startActivity(i);
+                    break;
+            case R.id.infos_card : i =
+                    new Intent(this, InfoEtabActivity.class);
+                    i.putExtra("ien_bis", ien);
+                    startActivity(i);
+            break;
             default: break;
         }
     }

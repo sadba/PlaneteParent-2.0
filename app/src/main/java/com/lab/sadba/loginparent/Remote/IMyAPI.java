@@ -3,10 +3,12 @@ package com.lab.sadba.loginparent.Remote;
 import com.lab.sadba.loginparent.Model.Enfant;
 import com.lab.sadba.loginparent.Model.Evaluation;
 import com.lab.sadba.loginparent.Model.InfoEtab;
+import com.lab.sadba.loginparent.Model.Note;
 import com.lab.sadba.loginparent.Model.PostRegisterUser;
 import com.lab.sadba.loginparent.Model.PostUser;
 import com.lab.sadba.loginparent.Model.PostVerifUser;
 import com.lab.sadba.loginparent.Model.RegisterUser;
+import com.lab.sadba.loginparent.Model.Temps;
 import com.lab.sadba.loginparent.Model.User;
 import com.lab.sadba.loginparent.Model.VerifUser;
 
@@ -48,4 +50,10 @@ public interface IMyAPI {
 
     @GET("etab_by_code_structure")
     Call<InfoEtab> getInfos(@Query("code") String code);
+
+    @GET("planning-eleve/index.php")
+    Observable<List<Temps>> getTemps(@Query("ien") String ien, @Query("jour") String jour);
+
+    @GET("notes_eleve/index.php")
+    Observable<List<Note>> getNotes(@Query("ien") String ien, @Query("option") String option);
 }

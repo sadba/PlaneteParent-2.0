@@ -8,6 +8,9 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 
 import com.lab.sadba.loginparent.Adapter.ViewPagerAdapter;
+import com.lab.sadba.loginparent.Fragments.BulletinFragment;
+import com.lab.sadba.loginparent.Fragments.CompoFragment;
+import com.lab.sadba.loginparent.Fragments.DevoirFragment;
 import com.lab.sadba.loginparent.Fragments.JeudiFragment;
 import com.lab.sadba.loginparent.Fragments.LundiFragment;
 import com.lab.sadba.loginparent.Fragments.MardiFragment;
@@ -32,10 +35,12 @@ public class NoteActivity extends AppCompatActivity {
         toolbar =  findViewById(R.id.toolbarNote);
         toolbar.setTitle("NOTES ET BULLETINS");
 
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.AddFragment(new LundiFragment(), "Devoirs");
-        adapter.AddFragment(new MardiFragment(), "Compositions");
-        adapter.AddFragment(new MercrediFragment(), "Bulletins");
+
+        Bundle bundle = new Bundle();
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager(), bundle, this);
+        adapter.AddFragment(new DevoirFragment(), "Devoirs");
+        adapter.AddFragment(new CompoFragment(), "Compositions");
+        adapter.AddFragment(new BulletinFragment(), "Bulletins");
 
         //adapter Setup
         viewPager.setAdapter(adapter);

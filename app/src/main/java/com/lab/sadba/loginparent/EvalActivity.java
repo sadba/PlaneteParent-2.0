@@ -18,6 +18,7 @@ import com.lab.sadba.loginparent.Model.User;
 import com.lab.sadba.loginparent.Remote.ApiClient2;
 import com.lab.sadba.loginparent.Remote.IMyAPI;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.Observable;
@@ -51,8 +52,17 @@ public class EvalActivity extends AppCompatActivity {
                     .observeOn(Schedulers.computation())
                     .map(eval -> {
                         Realm realm = Realm.getDefaultInstance();
-                        realm.executeTransaction(trRealm->trRealm.copyToRealm(eval));
-                        Log.d("ooo",realm.where(Evaluation.class).findAll().size()+"");
+                        List<Evaluation> results = realm.where(Evaluation.class).findAll();
+                        List<String> id_eval_exist = new ArrayList<>();
+                        for (Evaluation e: results){
+                            id_eval_exist.add(e.getId_eval());
+                        }
+                        for (Evaluation e2: eval){
+                            if (!id_eval_exist.contains(e2.getId_eval())){
+                                realm.executeTransaction(trRealm->trRealm.copyToRealm(e2));
+                                Log.d("ooo",realm.where(Evaluation.class).findAll().size()+"");
+                            }
+                        }
                         return eval;
                     })
                     .mergeWith(dbObservable)
