@@ -51,13 +51,6 @@ public class EmploiActivity extends AppCompatActivity {
         bundle.putString("ien_enfant", ien_bis);
 
         LundiFragment lundiFragment = new LundiFragment();
-        MardiFragment mardiFragment = new MardiFragment();
-        MercrediFragment mercrediFragment = new MercrediFragment();
-        JeudiFragment jeudiFragment = new JeudiFragment();
-        VendrediFragment vendrediFragment = new VendrediFragment();
-        SamediFragment samediFragment = new SamediFragment();
-
-
 
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager(), bundle, this);
         adapter.AddFragment(lundiFragment, "LUN");
@@ -71,7 +64,6 @@ public class EmploiActivity extends AppCompatActivity {
         tabLayout.setupWithViewPager(viewPager);
 
         lundiFragment.setArguments(bundle);
-       // return(lundiFragment);
 
     }
 }

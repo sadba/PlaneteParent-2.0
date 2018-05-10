@@ -2,13 +2,16 @@ package com.lab.sadba.loginparent;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
+import android.preference.PreferenceManager;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.view.View;
+import android.widget.Toast;
 import android.widget.Toolbar;
 
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener{
@@ -39,6 +42,11 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         toolbar.setTitle("Dashboard");
 
          ien = getIntent().getStringExtra("ien_enfant");
+        //Toast.makeText(this, ien, Toast.LENGTH_SHORT).show();
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString("ien_enfant", ien);
+        editor.apply();
 
     }
 

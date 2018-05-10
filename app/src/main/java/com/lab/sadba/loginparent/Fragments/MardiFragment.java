@@ -3,9 +3,11 @@ package com.lab.sadba.loginparent.Fragments;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,6 +15,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.lab.sadba.loginparent.Adapter.TempsAdapter;
 import com.lab.sadba.loginparent.Model.Enfant;
@@ -37,12 +40,21 @@ public class MardiFragment extends Fragment {
 
 
     private RecyclerView recycler_mardi;
+    private String value;
     private Realm realm;
 
     View view;
 
     public MardiFragment() {
         // Required empty public constructor
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstance){
+        super.onCreate(savedInstance);
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+         value = sharedPreferences.getString("ien_Parent", "");
+        //Toast.makeText(getContext(), value, Toast.LENGTH_SHORT).show();
     }
 
     @SuppressLint("CheckResult")
@@ -64,7 +76,7 @@ public class MardiFragment extends Fragment {
         Observable<List<Temps>> dbObservable = Observable.create(e -> getDBTemps());
 
         if (isNetworkAvailable(getActivity())){
-            api.getTemps("MA1445001","mardi")
+            api.getTemps(value,"mardi")
                     .subscribeOn(Schedulers.io())
                     .observeOn(Schedulers.computation())
                     .map(temp -> {

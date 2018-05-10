@@ -3,9 +3,11 @@ package com.lab.sadba.loginparent.Fragments;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -37,12 +39,21 @@ public class VendrediFragment extends Fragment {
 
 
     private RecyclerView recycler_vendredi;
+    private String value;
     private Realm realm;
 
     View view;
 
     public VendrediFragment() {
         // Required empty public constructor
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstance){
+        super.onCreate(savedInstance);
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+        value = sharedPreferences.getString("ien_Parent", "");
+        //Toast.makeText(getContext(), value, Toast.LENGTH_SHORT).show();
     }
 
     @SuppressLint("CheckResult")
@@ -64,7 +75,7 @@ public class VendrediFragment extends Fragment {
         Observable<List<Temps>> dbObservable = Observable.create(e -> getDBTemps());
 
         if (isNetworkAvailable(getActivity())){
-            api.getTemps("MA1445001","vendredi")
+            api.getTemps(value,"vendredi")
                     .subscribeOn(Schedulers.io())
                     .observeOn(Schedulers.computation())
                     .map(temp -> {

@@ -23,6 +23,7 @@ public class NoteActivity extends AppCompatActivity {
     Toolbar toolbar;
     private TabLayout tabLayout;
     private ViewPager viewPager;
+    private String ien_note;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +33,7 @@ public class NoteActivity extends AppCompatActivity {
         tabLayout = findViewById(R.id.tablayout_id);
         viewPager = findViewById(R.id.viewpager_id);
 
-        toolbar =  findViewById(R.id.toolbarNote);
+        toolbar = findViewById(R.id.toolbarNote);
         toolbar.setTitle("NOTES ET BULLETINS");
 
 
@@ -45,5 +46,31 @@ public class NoteActivity extends AppCompatActivity {
         //adapter Setup
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
+
+        setUpViewPager(viewPager);
+    }
+
+
+    private void setUpViewPager(final ViewPager viewPager) {
+        // Enfant enfant = new Enfant();
+
+        //ien_note = getIntent().getStringExtra("ien_bis");
+        //Toast.makeText(this, ien_bis, Toast.LENGTH_SHORT).show();
+        Bundle bundle = new Bundle();
+        //bundle.putString("ien_enfant", ien_note);
+
+        DevoirFragment devoirFragment = new DevoirFragment();
+
+        //Bundle bundle = new Bundle();
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager(), bundle, this);
+        adapter.AddFragment(new DevoirFragment(), "Devoirs");
+        adapter.AddFragment(new CompoFragment(), "Compositions");
+        adapter.AddFragment(new BulletinFragment(), "Bulletins");
+
+        //adapter Setup
+        viewPager.setAdapter(adapter);
+        tabLayout.setupWithViewPager(viewPager);
+
+        devoirFragment.setArguments(bundle);
     }
 }
