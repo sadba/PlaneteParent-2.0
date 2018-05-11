@@ -76,7 +76,7 @@ public class DevoirFragment extends Fragment {
         Observable<List<Note>> dbObservable = Observable.create(e -> getDBNote());
 
         if (isNetworkAvailable(getActivity())){
-            api.getNotes("MA1445001","devoir")
+            api.getNotes(value,"devoir")
                     .subscribeOn(Schedulers.io())
                     .observeOn(Schedulers.computation())
                     .map(notes -> {

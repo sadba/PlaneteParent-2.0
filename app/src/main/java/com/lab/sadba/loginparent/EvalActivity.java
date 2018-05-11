@@ -2,8 +2,10 @@ package com.lab.sadba.loginparent;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -29,6 +31,7 @@ import io.realm.Realm;
 public class EvalActivity extends AppCompatActivity {
 
     private RecyclerView recyclerVIewEval;
+    private String value;
     private Realm realm;
 
     @SuppressLint("CheckResult")
@@ -42,12 +45,16 @@ public class EvalActivity extends AppCompatActivity {
         IMyAPI api = ApiClient2.getInstance()
                 .getIMyAPI();
 
+
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        value = sharedPreferences.getString("ien_enfant", "");
+
         Enfant enfant = realm.where(Enfant.class).findFirst();
 
         Observable<List<Evaluation>> dbObservable = Observable.create(e -> getDBEval());
 
         if (isNetworkAvailable()){
-            api.getEval("MA1445001")
+            api.getEval(value)
                     .subscribeOn(Schedulers.io())
                     .observeOn(Schedulers.computation())
                     .map(eval -> {

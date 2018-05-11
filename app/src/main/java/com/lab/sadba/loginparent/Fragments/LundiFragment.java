@@ -94,11 +94,11 @@ public class LundiFragment extends Fragment {
                         List<Temps> results = realm.where(Temps.class).findAll();
                         List<String> id_temps_exist = new ArrayList<>();
                         for (Temps t: results) {
-                            id_temps_exist.add(t.getId_planing_horaire());
+                            id_temps_exist.add(t.getNum_jour());
                         }
                         for (Temps t2: temp ){
-                            if (!id_temps_exist.contains(t2.getId_planing_horaire())){
-                                realm.executeTransaction(trRealm->trRealm.copyToRealm(t2));
+                            if (!id_temps_exist.contains(t2.getNum_jour())){
+                                realm.executeTransaction(trRealm->trRealm.copyToRealmOrUpdate(t2));
                                 Log.d("ooo",realm.where(Temps.class).findAll().size()+"");
                             }
                         }

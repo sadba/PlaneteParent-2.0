@@ -76,7 +76,7 @@ public class CompoFragment extends Fragment {
         Observable<List<Note>> dbObservable = Observable.create(e -> getDBNote());
 
         if (isNetworkAvailable(getActivity())){
-            api.getNotes("MA1445001","composition")
+            api.getNotes(value,"composition")
                     .subscribeOn(Schedulers.io())
                     .observeOn(Schedulers.computation())
                     .map(notes -> {

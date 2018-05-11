@@ -84,12 +84,12 @@ public class MercrediFragment extends Fragment {
 
                         List<Temps> results = realm.where(Temps.class).findAll();
                         List<String> id_temps_exist = new ArrayList<>();
-                        for (Temps t: results) {
-                            id_temps_exist.add(t.getId_planing_horaire());
+                        for (Temps tmer: results) {
+                            id_temps_exist.add(tmer.getNum_jour());
                         }
-                        for (Temps t2: temp ){
-                            if (!id_temps_exist.contains(t2.getId_planing_horaire())){
-                                realm.executeTransaction(trRealm->trRealm.copyToRealm(t2));
+                        for (Temps tmercredi: temp ){
+                            if (!id_temps_exist.contains(tmercredi.getNum_jour())){
+                                realm.executeTransaction(trRealm->trRealm.copyToRealmOrUpdate(tmercredi));
                                 Log.d("ooo",realm.where(Temps.class).findAll().size()+"");
                             }
                         }
