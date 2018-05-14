@@ -8,6 +8,7 @@ import io.realm.annotations.PrimaryKey;
 public class Temps extends RealmObject {
 
 
+    @PrimaryKey
     @SerializedName("id_planing_horaire")
     private String id_planing_horaire;
     @SerializedName("heure_debut")
@@ -30,7 +31,6 @@ public class Temps extends RealmObject {
     private String libelle_classe_physique;
     @SerializedName("jour_planning")
     private String jour_planning;
-    @PrimaryKey
     @SerializedName("num_jour")
     private String num_jour;
 
