@@ -14,6 +14,7 @@
         android:paddingTop="300dp"
         android:paddingLeft="100dp"
         android:textStyle="bold"
+        android:visibility="gone"
         android:id="@+id/visibility_lundi"
 
         />

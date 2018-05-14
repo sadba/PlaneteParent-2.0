@@ -65,7 +65,7 @@ public class MercrediFragment extends Fragment {
 
         realm = Realm.getDefaultInstance();
         RealmResults<Temps> results = realm.where(Temps.class)
-                .equalTo("num_jour", "2")
+                .equalTo("num_jour", "3")
                 .findAll();
         temps = realm.copyFromRealm(results);
 
@@ -81,11 +81,13 @@ public class MercrediFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_mardi, container, false);
-        recycler_mardi = view.findViewById(R.id.recycler_mardi);
+        //recycler_mardi = view.findViewById(R.id.recycler_mardi);
         visible = view.findViewById(R.id.visibility);
 
         view = inflater.inflate(R.layout.fragment_lundi, container, false);
         recycler_mardi = view.findViewById(R.id.recycler_temps);
+
+
 
         if (temps.isEmpty()){
             visible.setVisibility(View.VISIBLE);
@@ -96,6 +98,9 @@ public class MercrediFragment extends Fragment {
             //recycler_lundi.setItemAnimator();
             recycler_mardi.setAdapter(adapter);
         }
+
+
+
 
         return view;
 
@@ -123,7 +128,4 @@ public class MercrediFragment extends Fragment {
         }
         return status;
     }
-
-
-
 }

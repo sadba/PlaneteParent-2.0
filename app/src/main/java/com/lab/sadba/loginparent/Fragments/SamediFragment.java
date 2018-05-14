@@ -65,7 +65,7 @@ public class SamediFragment extends Fragment {
 
         realm = Realm.getDefaultInstance();
         RealmResults<Temps> results = realm.where(Temps.class)
-                .equalTo("num_jour", "2")
+                .equalTo("num_jour", "6")
                 .findAll();
         temps = realm.copyFromRealm(results);
 
@@ -81,14 +81,15 @@ public class SamediFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_mardi, container, false);
-        recycler_mardi = view.findViewById(R.id.recycler_mardi);
+        //recycler_mardi = view.findViewById(R.id.recycler_mardi);
         visible = view.findViewById(R.id.visibility);
 
         view = inflater.inflate(R.layout.fragment_lundi, container, false);
         recycler_mardi = view.findViewById(R.id.recycler_temps);
 
+
+
         if (temps.isEmpty()){
-            visible.setText("Pas de cours pour ce jour");
             visible.setVisibility(View.VISIBLE);
         } else {
             TempsAdapter adapter = new TempsAdapter(Objects.requireNonNull(getContext()), temps);
@@ -97,6 +98,9 @@ public class SamediFragment extends Fragment {
             //recycler_lundi.setItemAnimator();
             recycler_mardi.setAdapter(adapter);
         }
+
+
+
 
         return view;
 
@@ -124,6 +128,4 @@ public class SamediFragment extends Fragment {
         }
         return status;
     }
-
-
 }

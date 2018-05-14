@@ -32,7 +32,6 @@
         <activity android:name=".NoteActivity" />
         <activity android:name=".EvalActivity" />
         <activity android:name=".InfoEtabActivity" />
-        <activity android:name=".SlideAvtivity"></activity>
     </application>
 
 </manifest>
