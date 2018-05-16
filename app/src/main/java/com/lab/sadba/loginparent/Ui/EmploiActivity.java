@@ -1,4 +1,4 @@
-package com.lab.sadba.loginparent;
+package com.lab.sadba.loginparent.Ui;
 
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -19,6 +19,7 @@ import com.lab.sadba.loginparent.Fragments.SamediFragment;
 import com.lab.sadba.loginparent.Fragments.VendrediFragment;
 import com.lab.sadba.loginparent.Model.Enfant;
 import com.lab.sadba.loginparent.Model.Temps;
+import com.lab.sadba.loginparent.R;
 import com.lab.sadba.loginparent.Remote.ApiClient3;
 import com.lab.sadba.loginparent.Remote.IMyAPI;
 

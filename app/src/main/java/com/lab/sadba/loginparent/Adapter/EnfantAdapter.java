@@ -9,9 +9,7 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.lab.sadba.loginparent.EnfantActivity;
-import com.lab.sadba.loginparent.HomeActivity;
-import com.lab.sadba.loginparent.MenuActivity;
+import com.lab.sadba.loginparent.Ui.HomeActivity;
 import com.lab.sadba.loginparent.Model.Enfant;
 import com.lab.sadba.loginparent.R;
 

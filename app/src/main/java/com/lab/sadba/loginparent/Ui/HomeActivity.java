@@ -1,4 +1,4 @@
-package com.lab.sadba.loginparent;
+package com.lab.sadba.loginparent.Ui;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -6,20 +6,17 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.preference.PreferenceManager;
 import android.support.annotation.RequiresApi;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
 import com.lab.sadba.loginparent.Model.Temps;
+import com.lab.sadba.loginparent.R;
 import com.lab.sadba.loginparent.Remote.ApiClient3;
 import com.lab.sadba.loginparent.Remote.IMyAPI;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;

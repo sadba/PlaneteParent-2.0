@@ -12,26 +12,26 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".Ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RegisterActivity" />
-        <activity android:name=".HomeActivity" />
+        <activity android:name=".Ui.RegisterActivity" />
+        <activity android:name=".Ui.HomeActivity" />
         <activity
-            android:name=".TestActivity"
+            android:name=".Ui.TestActivity"
             android:label="@string/title_activity_test"
             android:theme="@style/AppTheme" />
-        <activity android:name=".VerifActivity" />
-        <activity android:name=".EnfantActivity" />
-        <activity android:name=".MenuActivity" />
-        <activity android:name=".EmploiActivity" />
-        <activity android:name=".NoteActivity" />
-        <activity android:name=".EvalActivity" />
-        <activity android:name=".InfoEtabActivity" />
+        <activity android:name=".Ui.VerifActivity" />
+        <activity android:name=".Ui.EnfantActivity" />
+        <activity android:name=".Ui.MenuActivity" />
+        <activity android:name=".Ui.EmploiActivity" />
+        <activity android:name=".Ui.NoteActivity" />
+        <activity android:name=".Ui.EvalActivity" />
+        <activity android:name=".Ui.InfoEtabActivity" />
     </application>
 
 </manifest>

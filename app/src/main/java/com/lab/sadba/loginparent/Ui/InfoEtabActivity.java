@@ -1,21 +1,17 @@
-package com.lab.sadba.loginparent;
+package com.lab.sadba.loginparent.Ui;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.lab.sadba.loginparent.Common.Common;
 import com.lab.sadba.loginparent.Common.Common2;
 import com.lab.sadba.loginparent.Model.Enfant;
 import com.lab.sadba.loginparent.Model.InfoEtab;
+import com.lab.sadba.loginparent.R;
 import com.lab.sadba.loginparent.Remote.IMyAPI;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import io.realm.Realm;
-import io.realm.RealmResults;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

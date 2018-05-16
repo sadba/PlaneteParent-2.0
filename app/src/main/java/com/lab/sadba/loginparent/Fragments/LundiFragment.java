@@ -12,31 +12,20 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.lab.sadba.loginparent.Adapter.TempsAdapter;
-import com.lab.sadba.loginparent.EmploiActivity;
-import com.lab.sadba.loginparent.Model.Enfant;
 import com.lab.sadba.loginparent.Model.Temps;
 import com.lab.sadba.loginparent.R;
-import com.lab.sadba.loginparent.Remote.ApiClient2;
-import com.lab.sadba.loginparent.Remote.ApiClient3;
-import com.lab.sadba.loginparent.Remote.IMyAPI;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import io.reactivex.Observable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.Nullable;
-import io.reactivex.observers.DisposableObserver;
-import io.reactivex.schedulers.Schedulers;
 import io.realm.Realm;
 import io.realm.RealmResults;
 

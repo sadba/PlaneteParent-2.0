@@ -1,4 +1,4 @@
-package com.lab.sadba.loginparent;
+package com.lab.sadba.loginparent.Ui;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -11,24 +11,17 @@ import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.lab.sadba.loginparent.Adapter.EvalAdapter;
-import com.lab.sadba.loginparent.Adapter.TempsAdapter;
-import com.lab.sadba.loginparent.Model.Enfant;
 import com.lab.sadba.loginparent.Model.Evaluation;
-import com.lab.sadba.loginparent.Model.Temps;
-import com.lab.sadba.loginparent.Model.User;
-import com.lab.sadba.loginparent.Remote.ApiClient2;
+import com.lab.sadba.loginparent.R;
 import com.lab.sadba.loginparent.Remote.ApiClient3;
 import com.lab.sadba.loginparent.Remote.IMyAPI;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
-import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;

@@ -1,4 +1,4 @@
-package com.lab.sadba.loginparent;
+package com.lab.sadba.loginparent.Ui;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
@@ -13,29 +13,21 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.Toolbar;
 
 import com.lab.sadba.loginparent.Adapter.EnfantAdapter;
 import com.lab.sadba.loginparent.Model.Enfant;
 import com.lab.sadba.loginparent.Model.User;
+import com.lab.sadba.loginparent.R;
 import com.lab.sadba.loginparent.Remote.ApiClient;
-import com.lab.sadba.loginparent.Remote.ApiUtils;
 import com.lab.sadba.loginparent.Remote.IMyAPI;
-import com.lab.sadba.loginparent.Remote.RetrofitClient;
+
 import io.reactivex.Observable;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import io.realm.Realm;
-import io.realm.RealmResults;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class EnfantActivity extends AppCompatActivity {
 

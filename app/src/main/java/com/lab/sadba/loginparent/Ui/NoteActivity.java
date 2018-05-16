@@ -1,5 +1,5 @@
 
-package com.lab.sadba.loginparent;
+package com.lab.sadba.loginparent.Ui;
 
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -17,6 +17,7 @@ import com.lab.sadba.loginparent.Fragments.MardiFragment;
 import com.lab.sadba.loginparent.Fragments.MercrediFragment;
 import com.lab.sadba.loginparent.Fragments.SamediFragment;
 import com.lab.sadba.loginparent.Fragments.VendrediFragment;
+import com.lab.sadba.loginparent.R;
 
 public class NoteActivity extends AppCompatActivity {
 

@@ -1,7 +1,9 @@
-package com.lab.sadba.loginparent;
+package com.lab.sadba.loginparent.Ui;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.lab.sadba.loginparent.R;
 
 public class MenuActivity extends AppCompatActivity {
 

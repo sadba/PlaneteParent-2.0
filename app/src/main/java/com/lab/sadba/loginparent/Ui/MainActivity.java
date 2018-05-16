@@ -1,9 +1,7 @@
-package com.lab.sadba.loginparent;
+package com.lab.sadba.loginparent.Ui;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -16,6 +14,7 @@ import android.widget.Toast;
 import com.lab.sadba.loginparent.Common.Common;
 import com.lab.sadba.loginparent.Model.PostUser;
 import com.lab.sadba.loginparent.Model.User;
+import com.lab.sadba.loginparent.R;
 import com.lab.sadba.loginparent.Remote.IMyAPI;
 
 import io.realm.Realm;
