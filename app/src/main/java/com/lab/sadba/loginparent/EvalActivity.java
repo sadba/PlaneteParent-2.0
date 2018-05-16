@@ -38,6 +38,7 @@ import io.realm.RealmResults;
 public class EvalActivity extends AppCompatActivity {
 
     private RecyclerView recyclerVIewEval;
+    android.support.v7.widget.Toolbar toolbar;
     private String value;
     private List<Evaluation> evals = new ArrayList<>();
     private Realm realm;
@@ -49,6 +50,9 @@ public class EvalActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_eval);
         recyclerVIewEval = findViewById(R.id.recycler_eval);
+
+        toolbar =  findViewById(R.id.toolbar_eval);
+        toolbar.setTitle("Evaluations Programmees");
 
        /* Realm.init(getApplicationContext());
         realm = Realm.getDefaultInstance();
@@ -112,12 +116,15 @@ public class EvalActivity extends AppCompatActivity {
                         } catch (Exception e){
                             realm.close();
                         }
-                        EvalAdapter adapter = new EvalAdapter(getApplicationContext(), evals);
-                        recyclerVIewEval.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-                        recyclerVIewEval.setItemAnimator(new DefaultItemAnimator());
-                        //recycler_lundi.setItemAnimator();
-                        recyclerVIewEval.setAdapter(adapter);
-                        //Toast.makeText(EvalActivity.this, evals.toString(), Toast.LENGTH_SHORT).show();
+                        if (evals.isEmpty()){
+                            Toast.makeText(EvalActivity.this, "Pas d'evaluations programmees pour le moment", Toast.LENGTH_LONG).show();
+                        } else{
+                            EvalAdapter adapter = new EvalAdapter(getApplicationContext(), evals);
+                            recyclerVIewEval.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                            recyclerVIewEval.setItemAnimator(new DefaultItemAnimator());
+                            //recycler_lundi.setItemAnimator();
+                            recyclerVIewEval.setAdapter(adapter);
+                        }
                     }
 
                     @Override

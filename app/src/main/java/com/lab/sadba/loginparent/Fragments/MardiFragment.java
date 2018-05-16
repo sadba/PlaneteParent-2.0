@@ -66,7 +66,7 @@ public class MardiFragment extends Fragment {
         realm = Realm.getDefaultInstance();
         RealmResults<Temps> results = realm.where(Temps.class)
                 .equalTo("num_jour", "2")
-                .findAll();
+                .findAllAsync();
         temps = realm.copyFromRealm(results);
 
 

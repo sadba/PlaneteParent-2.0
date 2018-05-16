@@ -66,7 +66,7 @@ public class MercrediFragment extends Fragment {
         realm = Realm.getDefaultInstance();
         RealmResults<Temps> results = realm.where(Temps.class)
                 .equalTo("num_jour", "3")
-                .findAll();
+                .findAllAsync();
         temps = realm.copyFromRealm(results);
 
 

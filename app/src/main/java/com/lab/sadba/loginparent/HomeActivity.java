@@ -10,6 +10,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 import android.widget.Toolbar;
@@ -18,6 +19,7 @@ import com.lab.sadba.loginparent.Model.Temps;
 import com.lab.sadba.loginparent.Remote.ApiClient3;
 import com.lab.sadba.loginparent.Remote.IMyAPI;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -60,6 +62,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         editor.putString("ien_enfant", ien);
         editor.apply();
 
+
+        Realm.init(getApplicationContext());
         getEmploi(ien);
 
     }
@@ -74,7 +78,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                     @Override
                     public void onNext(List<Temps> temps) {
                         realm = Realm.getDefaultInstance();
-                        Toast.makeText(HomeActivity.this, String.valueOf(temps.size()), Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(HomeActivity.this, String.valueOf(temps.size()), Toast.LENGTH_SHORT).show();
 
                         try{
                             realm = Realm.getDefaultInstance();
@@ -91,6 +95,10 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                                     temps1.setCode_classe(temp.getCode_classe());
                                     temps1.setCouleur_discipline(temp.getCouleur_discipline());
                                     temps1.setId_classe_physique(temp.getId_classe_physique());
+                                    temps1.setCouleur_discipline(temp.getCouleur_discipline());
+                                    temps1.setJour_planning(temp.getJour_planning());
+
+
                                     realm.copyToRealmOrUpdate(temps1);
                                 }
                             });

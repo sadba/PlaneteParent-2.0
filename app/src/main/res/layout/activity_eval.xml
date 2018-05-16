@@ -13,12 +13,14 @@
         android:theme="@style/AppTheme.AppBarOverlay">
 
         <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
+            android:id="@+id/toolbar_eval"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/colorPrimary"/>
 
     </android.support.design.widget.AppBarLayout>
+
+
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_eval"

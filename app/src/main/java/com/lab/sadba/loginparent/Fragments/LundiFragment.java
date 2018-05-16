@@ -63,10 +63,11 @@ public class LundiFragment extends Fragment {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
         value = sharedPreferences.getString("ien_Parent", "");
 
+
         realm = Realm.getDefaultInstance();
         RealmResults<Temps> results = realm.where(Temps.class)
                 .equalTo("num_jour", "1")
-                .findAll();
+                .findAllAsync();
         temps = realm.copyFromRealm(results);
 
 
