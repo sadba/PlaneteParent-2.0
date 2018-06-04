@@ -41,6 +41,7 @@ public class InfoEtabActivity extends AppCompatActivity {
         etab = findViewById(R.id.libelle_etab);
 
         infos(code);
+        realm.close();
 
 
     }
@@ -52,12 +53,15 @@ public class InfoEtabActivity extends AppCompatActivity {
                     public void onResponse(Call<InfoEtab> call, Response<InfoEtab> response) {
                         Toast.makeText(InfoEtabActivity.this, code, Toast.LENGTH_SHORT).show();
 
-
+                        realm = Realm.getDefaultInstance();
                         if (response.body() != null) {
+                            //InfoEtab infoEtab = new InfoEtab();
                             etab.setText(response.body().getNom_struct());
                             cycle.setText(response.body().getLibelle_type_systeme_ens());
                             tel.setText(response.body().getTel_chef_struct());
                         }
+                        //realm.copyToRealm(InfoEtab);
+
                     }
 
                     @Override

@@ -13,6 +13,11 @@
         android:gravity="center"
         android:id="@+id/appbarid">
 
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:src="@drawable/etablissementxxxhdpi"/>
+
     </android.support.design.widget.AppBarLayout>
 
     <LinearLayout

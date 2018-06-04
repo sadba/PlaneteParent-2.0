@@ -12,12 +12,17 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.lab.sadba.loginparent.Adapter.TempsAdapter;
+import com.lab.sadba.loginparent.Model.Enfant;
+import com.lab.sadba.loginparent.Model.InfosEleves;
+import com.lab.sadba.loginparent.Model.Note;
 import com.lab.sadba.loginparent.Model.Temps;
 import com.lab.sadba.loginparent.R;
 
@@ -38,6 +43,7 @@ public class LundiFragment extends Fragment {
     private String value;
     private List<Temps> temps = new ArrayList<>();
     private Realm realm;
+    private RealmResults<Temps> results;
     private TextView visible;
 
     View view;
@@ -49,18 +55,23 @@ public class LundiFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstance){
         super.onCreate(savedInstance);
+        realm = Realm.getDefaultInstance();
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
-        value = sharedPreferences.getString("ien_Parent", "");
+        value = sharedPreferences.getString("ien_enfant", "");
 
+        InfosEleves infosEleves = realm.where(InfosEleves.class).equalTo("ien" ,value).findFirst();
+        String code_classe = infosEleves.getCode_classe();
 
         realm = Realm.getDefaultInstance();
         RealmResults<Temps> results = realm.where(Temps.class)
                 .equalTo("num_jour", "1")
+                .equalTo("code_classe", code_classe)
                 .findAllAsync();
+
+
         temps = realm.copyFromRealm(results);
 
-
-        //Toast.makeText(getContext(), value, Toast.LENGTH_SHORT).show();
+        realm.close();
 
 
     }
@@ -79,15 +90,16 @@ public class LundiFragment extends Fragment {
 
 
 
-        if (temps.isEmpty()){
-            visible.setVisibility(View.VISIBLE);
-        } else {
+       // if (temps.isEmpty()){
+           // visible.setVisibility(View.VISIBLE);
+      //  } else {
+
             TempsAdapter adapter = new TempsAdapter(Objects.requireNonNull(getContext()), temps);
             recycler_mardi.setLayoutManager(new LinearLayoutManager(getContext()));
             recycler_mardi.setItemAnimator(new DefaultItemAnimator());
             //recycler_lundi.setItemAnimator();
             recycler_mardi.setAdapter(adapter);
-        }
+       // }
 
 
 

@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.lab.sadba.loginparent.Adapter.TempsAdapter;
 import com.lab.sadba.loginparent.Model.Enfant;
+import com.lab.sadba.loginparent.Model.InfosEleves;
 import com.lab.sadba.loginparent.Model.Temps;
 import com.lab.sadba.loginparent.R;
 import com.lab.sadba.loginparent.Remote.ApiClient2;
@@ -60,18 +61,23 @@ public class MardiFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstance){
         super.onCreate(savedInstance);
+        realm = Realm.getDefaultInstance();
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
-        value = sharedPreferences.getString("ien_Parent", "");
+        value = sharedPreferences.getString("ien_enfant", "");
+
+        InfosEleves infosEleves = realm.where(InfosEleves.class).equalTo("ien" ,value).findFirst();
+        String code_classe = infosEleves.getCode_classe();
 
         realm = Realm.getDefaultInstance();
         RealmResults<Temps> results = realm.where(Temps.class)
                 .equalTo("num_jour", "2")
+                .equalTo("code_classe", code_classe)
                 .findAllAsync();
+
+
         temps = realm.copyFromRealm(results);
 
-
-        //Toast.makeText(getContext(), value, Toast.LENGTH_SHORT).show();
-
+        realm.close();
 
     }
 

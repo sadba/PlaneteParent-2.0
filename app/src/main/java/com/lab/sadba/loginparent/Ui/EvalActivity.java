@@ -69,7 +69,7 @@ public class EvalActivity extends AppCompatActivity {
             realm = Realm.getDefaultInstance();
             RealmResults<Evaluation> results = realm.where(Evaluation.class)
                     .findAll();
-            Toast.makeText(this, results.toString(), Toast.LENGTH_SHORT).show();
+           // Toast.makeText(this, results.toString(), Toast.LENGTH_SHORT).show();
             evals = realm.copyFromRealm(results);
 
             EvalAdapter adapter = new EvalAdapter(getApplicationContext(), evals);

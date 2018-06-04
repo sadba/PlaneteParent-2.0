@@ -55,13 +55,13 @@ public class EmploiActivity extends AppCompatActivity {
 
        setUpViewPager(viewPager);
 
-      // getEmploi(ien_bis);
+       getEmploi(ien_bis);
 
 
 
     }
 
-   /* private void getEmploi(String ien) {
+    private void getEmploi(String ien) {
         realm = Realm.getDefaultInstance();
         IMyAPI service = ApiClient3.getRetrofit().create(IMyAPI.class);
         service.getTemps(ien)
@@ -107,7 +107,7 @@ public class EmploiActivity extends AppCompatActivity {
 
                     }
                 });
-    }*/
+    }
 
     private void setUpViewPager(final ViewPager viewPager){
        // Enfant enfant = new Enfant();

@@ -26,6 +26,7 @@ import com.lab.sadba.loginparent.Remote.IMyAPI;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -117,7 +118,7 @@ public class CompoFragment extends Fragment {
     }
 
     void setAdapterData(List<Note> notes){
-        NoteAdapter adapter = new NoteAdapter(getActivity(),notes);
+        NoteAdapter adapter = new NoteAdapter(Objects.requireNonNull(getContext()),notes);
         recycler_devoir.setLayoutManager(new LinearLayoutManager(getActivity()));
         //recycler_lundi.setItemAnimator();
         recycler_devoir.setAdapter(adapter);
