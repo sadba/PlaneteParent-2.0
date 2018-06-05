@@ -21,6 +21,7 @@ import com.lab.sadba.loginparent.Adapter.EvalAdapter;
 import com.lab.sadba.loginparent.Adapter.TempsAdapter;
 import com.lab.sadba.loginparent.Model.Evaluation;
 import com.lab.sadba.loginparent.Model.InfosEleves;
+import com.lab.sadba.loginparent.Model.Note;
 import com.lab.sadba.loginparent.Model.Temps;
 import com.lab.sadba.loginparent.R;
 import com.lab.sadba.loginparent.Remote.ApiClient3;
@@ -41,6 +42,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     android.support.v7.widget.Toolbar toolbar;
     private Realm realm;
     private List<Temps> evals = new ArrayList<>();
+    private List<Note> notes = new ArrayList<>();
     private CardView tempsCard, notesCard, evalCard, infosCard;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -65,7 +67,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         toolbar.setTitle("Dashboard");
 
          ien = getIntent().getStringExtra("ien_enfant");
-        //Toast.makeText(this, ien, Toast.LENGTH_SHORT).show();
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString("ien_enfant", ien);
@@ -81,6 +82,52 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
         getInfos(ien);
 
+        getNotes(ien);
+
+    }
+
+    private void getNotes(String ien) {
+        realm = Realm.getDefaultInstance();
+        IMyAPI service = ApiClient3.getRetrofit().create(IMyAPI.class);
+        service.getNotes(ien)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new DisposableObserver<List<Note>>() {
+                    @Override
+                    public void onNext(List<Note> notes) {
+                        realm = Realm.getDefaultInstance();
+                        Toast.makeText(HomeActivity.this, String.valueOf(notes.size()), Toast.LENGTH_SHORT).show();
+
+                        try{
+                            realm = Realm.getDefaultInstance();
+                            realm.executeTransaction(realm1 -> {
+                                for (Note note: notes){
+                                    Note note1 = new Note();
+                                    note1.setId_note(note.getId_note());
+                                    note1.setDate_eval(note.getDate_eval());
+                                    note1.setDevoir(note.getDevoir());
+                                    note1.setLibelle_discipline(note.getLibelle_discipline());
+                                    note1.setNote(note.getNote());
+                                    realm.copyToRealmOrUpdate(note1);
+                                }
+                            });
+                        } catch (Exception e){
+                            realm.close();
+                        }
+
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Toast.makeText(getApplicationContext(), e.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
     }
 
     @SuppressLint("CheckResult")
@@ -94,7 +141,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                     @Override
                     public void onNext(List<Temps> temps) {
                         realm = Realm.getDefaultInstance();
-                       // Toast.makeText(HomeActivity.this, String.valueOf(temps.size()), Toast.LENGTH_SHORT).show();
 
                         try{
                             realm = Realm.getDefaultInstance();
@@ -117,6 +163,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
                                     realm.copyToRealmOrUpdate(temps1);
                                 }
+
+
                             });
                         } catch (Exception e){
                             realm.close();
@@ -149,7 +197,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                     @Override
                     public void onNext(List<InfosEleves> infos) {
                         realm = Realm.getDefaultInstance();
-                        //Toast.makeText(EvalActivity.this, String.valueOf(evals.size()), Toast.LENGTH_SHORT).show();
 
                         try{
                             realm = Realm.getDefaultInstance();
@@ -174,8 +221,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                             realm.close();
                         }
 
-                        List<InfosEleves> infosEleves = realm.where(InfosEleves.class).findAll();
-                        Toast.makeText(HomeActivity.this, String.valueOf(infosEleves.size()), Toast.LENGTH_SHORT).show();
+
 
                     }
 

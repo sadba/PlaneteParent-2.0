@@ -46,10 +46,11 @@ import io.realm.RealmResults;
 public class MercrediFragment extends Fragment {
 
 
-    private RecyclerView recycler_mardi;
+    private RecyclerView recycler_mercredi;
     private String value;
     private List<Temps> temps = new ArrayList<>();
     private Realm realm;
+    private RealmResults<Temps> results;
     private TextView visible;
 
     View view;
@@ -87,28 +88,16 @@ public class MercrediFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_mardi, container, false);
-        //recycler_mardi = view.findViewById(R.id.recycler_mardi);
-        visible = view.findViewById(R.id.visibility);
 
-        view = inflater.inflate(R.layout.fragment_lundi, container, false);
-        recycler_mardi = view.findViewById(R.id.recycler_temps);
+        view = inflater.inflate(R.layout.fragment_mercredi, container, false);
+        recycler_mercredi = view.findViewById(R.id.recycler_temps2);
 
 
-
-        if (temps.isEmpty()){
-            visible.setVisibility(View.VISIBLE);
-        } else {
-            TempsAdapter adapter = new TempsAdapter(Objects.requireNonNull(getContext()), temps);
-            recycler_mardi.setLayoutManager(new LinearLayoutManager(getContext()));
-            recycler_mardi.setItemAnimator(new DefaultItemAnimator());
-            //recycler_lundi.setItemAnimator();
-            recycler_mardi.setAdapter(adapter);
-        }
-
-
-
-
+        TempsAdapter adapter = new TempsAdapter(getContext(), temps);
+        recycler_mercredi.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recycler_mercredi.setHasFixedSize(true);
+        //recycler_lundi.setItemAnimator();
+        recycler_mercredi.setAdapter(adapter);
         return view;
 
     }

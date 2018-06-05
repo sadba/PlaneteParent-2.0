@@ -46,10 +46,11 @@ import io.realm.RealmResults;
 public class JeudiFragment extends Fragment {
 
 
-    private RecyclerView recycler_mardi;
+    private RecyclerView recycler_jeudi;
     private String value;
     private List<Temps> temps = new ArrayList<>();
     private Realm realm;
+    private RealmResults<Temps> results;
     private TextView visible;
 
     View view;
@@ -87,28 +88,16 @@ public class JeudiFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_mardi, container, false);
-        //recycler_mardi = view.findViewById(R.id.recycler_mardi);
-        visible = view.findViewById(R.id.visibility);
 
-        view = inflater.inflate(R.layout.fragment_lundi, container, false);
-        recycler_mardi = view.findViewById(R.id.recycler_temps);
+        view = inflater.inflate(R.layout.fragment_jeudi, container, false);
+        recycler_jeudi = view.findViewById(R.id.recycler_temps3);
 
 
-
-        if (temps.isEmpty()){
-            visible.setVisibility(View.VISIBLE);
-        } else {
-            TempsAdapter adapter = new TempsAdapter(Objects.requireNonNull(getContext()), temps);
-            recycler_mardi.setLayoutManager(new LinearLayoutManager(getContext()));
-            recycler_mardi.setItemAnimator(new DefaultItemAnimator());
-            //recycler_lundi.setItemAnimator();
-            recycler_mardi.setAdapter(adapter);
-        }
-
-
-
-
+        TempsAdapter adapter = new TempsAdapter(getContext(), temps);
+        recycler_jeudi.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recycler_jeudi.setHasFixedSize(true);
+        //recycler_lundi.setItemAnimator();
+        recycler_jeudi.setAdapter(adapter);
         return view;
 
     }
@@ -135,6 +124,4 @@ public class JeudiFragment extends Fragment {
         }
         return status;
     }
-
-
 }

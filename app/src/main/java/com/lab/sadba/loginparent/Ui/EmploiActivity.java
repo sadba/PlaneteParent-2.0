@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.widget.Toast;
 
@@ -32,6 +33,8 @@ import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 import io.realm.Realm;
 
+import static java.security.AccessController.getContext;
+
 public class EmploiActivity extends AppCompatActivity {
 
     Toolbar toolbar;
@@ -53,6 +56,8 @@ public class EmploiActivity extends AppCompatActivity {
 
 
 
+
+
        setUpViewPager(viewPager);
 
        getEmploi(ien_bis);
@@ -71,7 +76,7 @@ public class EmploiActivity extends AppCompatActivity {
                     @Override
                     public void onNext(List<Temps> temps) {
                         realm = Realm.getDefaultInstance();
-                        Toast.makeText(EmploiActivity.this, String.valueOf(temps.size()), Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(EmploiActivity.this, String.valueOf(temps.size()), Toast.LENGTH_SHORT).show();
 
                         try{
                             realm = Realm.getDefaultInstance();
@@ -89,6 +94,8 @@ public class EmploiActivity extends AppCompatActivity {
                                     temps1.setId_classe_physique(temp.getId_classe_physique());
                                     realm.copyToRealmOrUpdate(temps1);
                                 }
+
+
                             });
                         } catch (Exception e){
                             realm.close();

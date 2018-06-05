@@ -33,6 +33,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.Nullable;
 import io.reactivex.schedulers.Schedulers;
 import io.realm.Realm;
+import io.realm.RealmResults;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -40,9 +41,10 @@ import io.realm.Realm;
 public class CompoFragment extends Fragment {
 
 
-    private RecyclerView recycler_devoir;
+    private RecyclerView recycler_compo;
     private String value;
     private Realm realm;
+    private List<Note> notes = new ArrayList<>();
 
     View view;
 
@@ -51,11 +53,25 @@ public class CompoFragment extends Fragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstance) {
+    public void onCreate(Bundle savedInstance){
         super.onCreate(savedInstance);
+        realm = Realm.getDefaultInstance();
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
         value = sharedPreferences.getString("ien_enfant", "");
-        Toast.makeText(getContext(), value, Toast.LENGTH_SHORT).show();
+
+
+
+        realm = Realm.getDefaultInstance();
+        RealmResults<Note> results = realm.where(Note.class)
+                .equalTo("devoir", "Composition")
+                .findAllAsync();
+
+
+        notes = realm.copyFromRealm(results);
+
+        realm.close();
+
+
     }
 
     @SuppressLint("CheckResult")
@@ -63,77 +79,42 @@ public class CompoFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_devoir, container, false);
-        recycler_devoir =  view.findViewById(R.id.recycler_devoir);
 
-        initUi();
-        Realm.init(getActivity());
-        realm = Realm.getDefaultInstance();
-        IMyAPI api = ApiClient2.getInstance()
-                .getIMyAPI();
+        view = inflater.inflate(R.layout.fragment_compo, container, false);
+        recycler_compo = view.findViewById(R.id.recycler_compo);
 
-        Enfant enfant = realm.where(Enfant.class).findFirst();
 
-        Observable<List<Note>> dbObservable = Observable.create(e -> getDBNote());
-
-        if (isNetworkAvailable(getActivity())){
-            api.getNotes(value,"composition")
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(Schedulers.computation())
-                    .map(notes -> {
-                        Realm realm = Realm.getDefaultInstance();
-
-                        List<Note> results = realm.where(Note.class).findAll();
-                        List<String> id_note_exist = new ArrayList<>();
-                        for (Note n: results) {
-                            id_note_exist.add(n.getId_note());
-                        }
-                        for (Note n2: notes){
-                            if (!id_note_exist.contains(n2.getId_note())){
-                                realm.executeTransaction(trRealm->trRealm.copyToRealm(n2));
-                                Log.d("ooo",realm.where(Note.class).findAll().size()+"");
-                            }
-                        }
-
-                        return notes;
-                    })
-                    .mergeWith(dbObservable)
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(this::setAdapterData);
-        } else {
-
-            setAdapterData(getDBNote());
-        }
-
+        NoteAdapter adapter = new NoteAdapter(getContext(), notes);
+        recycler_compo.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recycler_compo.setHasFixedSize(true);
+        //recycler_lundi.setItemAnimator(getContext());
+        recycler_compo.setAdapter(adapter);
         return view;
-    }
-
-    private List<Note> getDBNote(){
-        return realm.copyFromRealm(realm.where(Note.class).equalTo("devoir", "Composition").findAll());
 
     }
 
-    private void initUi(){
-        recycler_devoir = view.findViewById(R.id.recycler_devoir);
-    }
 
-    void setAdapterData(List<Note> notes){
-        NoteAdapter adapter = new NoteAdapter(Objects.requireNonNull(getContext()),notes);
-        recycler_devoir.setLayoutManager(new LinearLayoutManager(getActivity()));
-        //recycler_lundi.setItemAnimator();
-        recycler_devoir.setAdapter(adapter);
-    }
+    public static boolean isNetworkAvailable(Context context) {
+        boolean status = false;
+        try {
+            ConnectivityManager cm = (ConnectivityManager) context
+                    .getSystemService(Context.CONNECTIVITY_SERVICE);
+            assert cm != null;
+            NetworkInfo netInfo = cm.getNetworkInfo(0);
 
-    private boolean isNetworkAvailable(Context context){
-        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo info = cm.getActiveNetworkInfo();
-        return  info!=null && info.isConnected();
+            if (netInfo != null
+                    && netInfo.getState() == NetworkInfo.State.CONNECTED) {
+                status = true;
+            } else {
+                netInfo = cm.getNetworkInfo(1);
+                if (netInfo != null
+                        && netInfo.getState() == NetworkInfo.State.CONNECTED)
+                    status = true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return status;
     }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        realm.close();
-    }
-
 }

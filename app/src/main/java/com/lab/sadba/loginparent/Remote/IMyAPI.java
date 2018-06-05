@@ -59,5 +59,5 @@ public interface IMyAPI {
     Observable<List<Temps>> getTemps(@Query("ien") String ien);
 
     @GET("notes_eleve/index.php")
-    Observable<List<Note>> getNotes(@Query("ien") String ien, @Query("option") String option);
+    Observable<List<Note>> getNotes(@Query("ien") String ien);
 }

@@ -43,21 +43,21 @@ public class TempsAdapter extends RecyclerView.Adapter<TempsAdapter.TempsViewHol
 
     class TempsViewHolder extends RecyclerView.ViewHolder{
 
-        TextView tvCours,tvHeureFin, tvHeureDebut, tvSalle;
+        TextView tvCours,tvHeureFin, tvHeureDebut, tvSale;
 
         public TempsViewHolder(View itemView){
             super(itemView);
             tvCours = itemView.findViewById(R.id.libelle_discipline_id);
             tvHeureDebut = itemView.findViewById(R.id.heure_debut_id);
             tvHeureFin = itemView.findViewById(R.id.heure_fin_id);
-            tvSalle = itemView.findViewById(R.id.salle_id);
+            tvSale = itemView.findViewById(R.id.salle_id);
         }
 
         void setItemContent(Temps temp){
             tvCours.setText(temp.getLibelle_discipline());
             tvHeureDebut.setText(temp.getHeure_debut());
             tvHeureFin.setText(temp.getHeure_fin());
-            tvSalle.setText(temp.getLibelle_classe_physique());
+            tvSale.setText(temp.getLibelle_classe_physique());
 
         }
     }

@@ -39,7 +39,7 @@ import io.realm.RealmResults;
  */
 public class LundiFragment extends Fragment {
 
-    private RecyclerView recycler_mardi;
+    private RecyclerView recycler_lundi;
     private String value;
     private List<Temps> temps = new ArrayList<>();
     private Realm realm;
@@ -81,29 +81,16 @@ public class LundiFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_mardi, container, false);
-       // recycler_mardi = view.findViewById(R.id.recycler_mardi);
-        visible = view.findViewById(R.id.visibility);
 
         view = inflater.inflate(R.layout.fragment_lundi, container, false);
-        recycler_mardi = view.findViewById(R.id.recycler_temps);
+        recycler_lundi = view.findViewById(R.id.recycler_temps);
 
 
-
-       // if (temps.isEmpty()){
-           // visible.setVisibility(View.VISIBLE);
-      //  } else {
-
-            TempsAdapter adapter = new TempsAdapter(Objects.requireNonNull(getContext()), temps);
-            recycler_mardi.setLayoutManager(new LinearLayoutManager(getContext()));
-            recycler_mardi.setItemAnimator(new DefaultItemAnimator());
-            //recycler_lundi.setItemAnimator();
-            recycler_mardi.setAdapter(adapter);
-       // }
-
-
-
-
+        TempsAdapter adapter = new TempsAdapter(getContext(), temps);
+        recycler_lundi.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recycler_lundi.setHasFixedSize(true);
+        //recycler_lundi.setItemAnimator(getContext());
+        recycler_lundi.setAdapter(adapter);
         return view;
 
     }
