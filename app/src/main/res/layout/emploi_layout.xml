@@ -26,16 +26,18 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <TextView
+                    android:textStyle="bold"
+                    android:textColor="@color/colorPrimary"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
-                    android:textStyle="bold"
                     android:text="Cours :"
                     />
                 <TextView
+                    android:fontFamily="sans-serif-condensed"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="18sp"
+                    android:textSize="25sp"
                     android:textStyle="bold"
                     android:text="Mathematiques"
                     android:layout_marginLeft="20dp"
@@ -49,21 +51,24 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
-                <TextView
+
+                    <TextView
+                    android:textStyle="bold"
+                    android:textColor="@color/colorPrimary"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:textStyle="italic"
+                    android:textSize="18sp"
                     android:text="Heure debut :"
                     />
                 <TextView
+                    android:fontFamily="sans-serif-condensed"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:textStyle="italic"
-                    android:id="@+id/heure_debut_id"
-                    android:text="Heure debut"
+                    android:textSize="25sp"
+                    android:textStyle="bold"
+                    android:text="Heure Debut"
                     android:layout_marginLeft="20dp"
+                    android:id="@+id/heure_debut_id"
                     />
 
             </LinearLayout>
@@ -72,22 +77,25 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+
                 <TextView
+                    android:textStyle="bold"
+                    android:textColor="@color/colorPrimary"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:textStyle="italic"
+                    android:textSize="18sp"
                     android:text="Heure fin :"
                     />
 
                 <TextView
+                    android:fontFamily="sans-serif-condensed"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:textStyle="italic"
-                    android:id="@+id/heure_fin_id"
-                    android:text="Heure fin"
+                    android:textSize="25sp"
+                    android:textStyle="bold"
+                    android:text="Heure Debut"
                     android:layout_marginLeft="20dp"
+                    android:id="@+id/heure_fin_id"
                     />
 
             </LinearLayout>
@@ -95,21 +103,24 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+
                 <TextView
+                    android:textStyle="bold"
+                    android:textColor="@color/colorPrimary"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:textStyle="italic"
+                    android:textSize="18sp"
                     android:text="Salle :"
                     />
                 <TextView
+                    android:fontFamily="sans-serif-condensed"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:textStyle="italic"
-                    android:id="@+id/salle_id"
+                    android:textSize="25sp"
+                    android:textStyle="bold"
                     android:text="Salle"
                     android:layout_marginLeft="20dp"
+                    android:id="@+id/salle_id"
                     />
             </LinearLayout>
         </LinearLayout>

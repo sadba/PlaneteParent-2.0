@@ -78,11 +78,13 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         assert ien != null;
         if (isNetworkAvailable(this)) {
             getEmploi(ien);
+            getInfos(ien);
+            getNotes(ien);
         }
 
-        getInfos(ien);
 
-        getNotes(ien);
+
+
 
     }
 
@@ -96,7 +98,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                     @Override
                     public void onNext(List<Note> notes) {
                         realm = Realm.getDefaultInstance();
-                        Toast.makeText(HomeActivity.this, String.valueOf(notes.size()), Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(HomeActivity.this, String.valueOf(notes.size()), Toast.LENGTH_SHORT).show();
 
                         try{
                             realm = Realm.getDefaultInstance();

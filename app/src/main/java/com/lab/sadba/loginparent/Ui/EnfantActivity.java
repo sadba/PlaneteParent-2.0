@@ -34,11 +34,17 @@ public class EnfantActivity extends AppCompatActivity {
     private RecyclerView recyclerEnfant;
     private Realm realm;
     ProgressDialog progressDoalog;
+    android.support.v7.widget.Toolbar toolbar;
     @SuppressLint("CheckResult")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enfant);
+
+        toolbar =  findViewById(R.id.toolbar_enfant);
+        toolbar.setTitle("Liste des enfants");
+
+
         progressDoalog = new ProgressDialog(EnfantActivity.this);
         progressDoalog.setMessage("Chargement des donnees...");
         progressDoalog.show();

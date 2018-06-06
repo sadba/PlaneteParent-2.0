@@ -60,7 +60,7 @@ public class EmploiActivity extends AppCompatActivity {
 
        setUpViewPager(viewPager);
 
-       getEmploi(ien_bis);
+       //getEmploi(ien_bis);
 
 
 

@@ -24,7 +24,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <TextView
-                    android:textStyle="italic"
+                    android:textStyle="bold"
                     android:textColor="@color/colorPrimary"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -32,7 +32,7 @@
                     android:text="Prenom :"
                     />
                 <TextView
-                    android:fontFamily="cursive"
+                    android:fontFamily="sans-serif-condensed"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="25sp"
@@ -54,15 +54,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="16sp"
-                    android:textStyle="italic"
+                    android:textStyle="bold"
                     android:text="Nom :"
                     />
                 <TextView
-                    android:fontFamily="cursive"
+                    android:fontFamily="sans-serif-condensed"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="25sp"
-                    android:textStyle="italic"
+                    android:textStyle="bold"
                     android:id="@+id/txt_nom"
                     android:text="Nom"
                     android:layout_marginLeft="20dp"
@@ -79,16 +79,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="16sp"
-                    android:textStyle="italic"
+                    android:textStyle="bold"
                     android:text="Classe :"
                     />
 
                 <TextView
-                    android:fontFamily="cursive"
+                    android:fontFamily="sans-serif-condensed"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="16sp"
-                    android:textStyle="italic"
+                    android:textStyle="bold"
                     android:id="@+id/txt_classe"
                     android:text="Classe"
                     android:layout_marginLeft="20dp"
@@ -104,15 +104,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="16sp"
-                    android:textStyle="italic"
+                    android:textStyle="bold"
                     android:text="Etablissement :"
                     />
                 <TextView
-                    android:fontFamily="cursive"
+                    android:fontFamily="sans-serif-condensed"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="16sp"
-                    android:textStyle="italic"
+                    android:textStyle="bold"
                     android:id="@+id/txt_etab"
                     android:text="Salle"
                     android:layout_marginLeft="20dp"

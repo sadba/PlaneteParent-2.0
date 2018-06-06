@@ -53,7 +53,7 @@ public interface IMyAPI {
     Observable<List<InfosEleves>> getInfosEleves(@Query("ien") String ien);
 
     @GET("etab_by_code_structure")
-    Call<InfoEtab> getInfos(@Query("code") String code);
+    Observable<InfoEtab> getInfos(@Query("code") String code);
 
     @GET("planning-eleve/index.php")
     Observable<List<Temps>> getTemps(@Query("ien") String ien);

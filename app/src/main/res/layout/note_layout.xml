@@ -26,16 +26,20 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <TextView
+                    android:textStyle="bold"
+                    android:textColor="@color/colorPrimary"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     android:text="Discipline :"
                     />
                 <TextView
+                    android:fontFamily="sans-serif-condensed"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="18sp"
-                    android:text="Mathematiques"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:text="Prenom"
                     android:layout_marginLeft="20dp"
                     android:id="@+id/discipline_note"
 
@@ -48,20 +52,22 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <TextView
+                    android:textStyle="bold"
+                    android:textColor="@color/colorPrimary"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="16sp"
-                    android:textStyle="italic"
                     android:text="Date evaluation :"
                     />
                 <TextView
+                    android:fontFamily="sans-serif-condensed"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:textStyle="italic"
-                    android:id="@+id/date_note"
-                    android:text="date"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:text="Date Evaluation"
                     android:layout_marginLeft="20dp"
+                    android:id="@+id/date_note"
                     />
 
             </LinearLayout>
@@ -71,21 +77,23 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <TextView
+                    android:textStyle="bold"
+                    android:textColor="@color/colorPrimary"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="16sp"
-                    android:textStyle="italic"
                     android:text="Note :"
                     />
 
                 <TextView
+                    android:fontFamily="sans-serif-condensed"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:textStyle="italic"
-                    android:id="@+id/note_note"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
                     android:text="Note"
                     android:layout_marginLeft="20dp"
+                    android:id="@+id/note_note"
                     />
 
             </LinearLayout>
