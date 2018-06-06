@@ -92,10 +92,10 @@ public class MercrediFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_mercredi, container, false);
         recycler_mercredi = view.findViewById(R.id.recycler_temps2);
 
-        visible = view.findViewById(R.id.visibility_mercredi);
-        if (results.isEmpty()){
-            visible.setVisibility(View.VISIBLE);
-        }
+      //  visible = view.findViewById(R.id.visibility_mercredi);
+        //if (results.isEmpty()){
+          //  visible.setVisibility(View.VISIBLE);
+       // }
 
 
         TempsAdapter adapter = new TempsAdapter(getContext(), temps);

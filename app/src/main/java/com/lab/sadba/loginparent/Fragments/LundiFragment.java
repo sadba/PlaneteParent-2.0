@@ -85,10 +85,10 @@ public class LundiFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_lundi, container, false);
         recycler_lundi = view.findViewById(R.id.recycler_temps);
 
-        visible = view.findViewById(R.id.visibility_lundi);
-        if (results.isEmpty()){
-            visible.setVisibility(View.VISIBLE);
-        }
+        //visible = view.findViewById(R.id.visibility_lundi);
+       // if (results.isEmpty()){
+            //visible.setVisibility(View.VISIBLE);
+        //}
 
 
         TempsAdapter adapter = new TempsAdapter(getContext(), temps);

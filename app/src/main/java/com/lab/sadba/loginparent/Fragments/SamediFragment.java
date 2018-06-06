@@ -94,10 +94,10 @@ public class SamediFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_samedi, container, false);
         recycler_samedi = view.findViewById(R.id.recycler_temps5);
 
-        visible = view.findViewById(R.id.visibility_samedi);
-        if (results.isEmpty()){
-            visible.setVisibility(View.VISIBLE);
-        }
+       // visible = view.findViewById(R.id.visibility_samedi);
+       // if (results.isEmpty()){
+         //   visible.setVisibility(View.VISIBLE);
+       // }
 
         TempsAdapter adapter = new TempsAdapter(getContext(), temps);
         recycler_samedi.setLayoutManager(new LinearLayoutManager(getActivity()));

@@ -16,10 +16,12 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.lab.sadba.loginparent.Adapter.EvalAdapter;
 import com.lab.sadba.loginparent.Adapter.TempsAdapter;
+import com.lab.sadba.loginparent.Model.Enfant;
 import com.lab.sadba.loginparent.Model.Evaluation;
 import com.lab.sadba.loginparent.Model.InfosEleves;
 import com.lab.sadba.loginparent.Model.Note;
@@ -45,10 +47,11 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     private List<Temps> evals = new ArrayList<>();
     private List<Note> notes = new ArrayList<>();
     private CardView tempsCard, notesCard, evalCard, infosCard;
+    TextView persoTitle;
 
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    @SuppressLint("CutPasteId")
+    @SuppressLint({"CutPasteId", "WrongViewCast"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +61,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         notesCard = findViewById(R.id.notes_card);
         evalCard = findViewById(R.id.eval_card);
         infosCard = findViewById(R.id.infos_card);
+        persoTitle = findViewById(R.id.prenom_toolbar);
 
         //Add Click Listener to the cards
         tempsCard.setOnClickListener(this);
@@ -69,7 +73,20 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
 
 
-        toolbar.setTitle("Dashboard");
+
+        realm = Realm.getDefaultInstance();
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        String value = sharedPreferences.getString("ien_enfant", "");
+        InfosEleves infosEleves = realm.where(InfosEleves.class).equalTo("ien" ,value).findFirst();
+        //String prenom = infosEleves.getPrenom_eleve();
+        //String nom = infosEleves.getNom_eleve();
+
+        //String lettre = prenom.substring(0,1);
+
+        //Toast.makeText(this, prenom, Toast.LENGTH_SHORT).show();
+
+         toolbar.setTitle("Dashboard");
+        // persoTitle.setText(lettre+"."+nom);
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
 
@@ -83,7 +100,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
 
 
-         ien = getIntent().getStringExtra("ien_enfant");
+        ien = getIntent().getStringExtra("ien_enfant");
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString("ien_enfant", ien);

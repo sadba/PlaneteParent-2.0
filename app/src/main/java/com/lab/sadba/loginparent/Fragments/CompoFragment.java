@@ -86,10 +86,10 @@ public class CompoFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_compo, container, false);
         recycler_compo = view.findViewById(R.id.recycler_compo);
 
-        visible = view.findViewById(R.id.visibility_compo);
-        if (results.isEmpty()){
-            visible.setVisibility(View.VISIBLE);
-        }
+       // visible = view.findViewById(R.id.visibility_compo);
+     //   if (results.isEmpty()){
+          //  visible.setVisibility(View.VISIBLE);
+       // }
 
 
         NoteAdapter adapter = new NoteAdapter(getContext(), notes);

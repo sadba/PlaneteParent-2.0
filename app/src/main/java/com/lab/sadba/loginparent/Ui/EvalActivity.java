@@ -1,6 +1,7 @@
 package com.lab.sadba.loginparent.Ui;
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
@@ -37,12 +38,18 @@ public class EvalActivity extends AppCompatActivity {
     private List<Evaluation> evals = new ArrayList<>();
     private Realm realm;
     private String ien;
+    ProgressDialog progressDoalog;
 
     @SuppressLint("CheckResult")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_eval);
+
+        progressDoalog = new ProgressDialog(EvalActivity.this);
+        progressDoalog.setMessage("Chargement des donnees...");
+        progressDoalog.show();
+
         recyclerVIewEval = findViewById(R.id.recycler_eval);
 
         toolbar =  findViewById(R.id.toolbar_eval);
@@ -50,7 +57,7 @@ public class EvalActivity extends AppCompatActivity {
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
 
 
-        toolbar.setTitle("Evaluations Programées");
+        toolbar.setTitle("Evaluations Programmées");
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
 
@@ -87,6 +94,7 @@ public class EvalActivity extends AppCompatActivity {
             recyclerVIewEval.setItemAnimator(new DefaultItemAnimator());
             //recycler_lundi.setItemAnimator();
             recyclerVIewEval.setAdapter(adapter);
+
         }
 }
 
@@ -114,12 +122,15 @@ public class EvalActivity extends AppCompatActivity {
                                     eval1.setLibelle_periode_eval(eval.getLibelle_periode_eval());
                                     eval1.setLibelle_type_evaluation(eval.getLibelle_type_evaluation());
                                     realm.copyToRealmOrUpdate(eval1);
+
+                                    progressDoalog.dismiss();
                                 }
                             });
                         } catch (Exception e){
                             realm.close();
                         }
                         if (evals.isEmpty()){
+                            progressDoalog.dismiss();
                             Toast.makeText(EvalActivity.this, "Pas d'evaluations programmees pour le moment", Toast.LENGTH_LONG).show();
                         } else{
                             EvalAdapter adapter = new EvalAdapter(getApplicationContext(), evals);

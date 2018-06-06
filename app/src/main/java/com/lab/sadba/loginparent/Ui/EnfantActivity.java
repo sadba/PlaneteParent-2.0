@@ -61,6 +61,8 @@ public class EnfantActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString("ien_Enfant", enf.getIen_eleve());
         editor.putString("code_etab", enf.getId_etablissement());
+        editor.putString("prenom", enf.getPrenom_eleve());
+        editor.putString("nom", enf.getNom_eleve());
         editor.apply();
 
         Observable<List<Enfant>> dbObservable =  Observable.create(e -> getDBEnfants());

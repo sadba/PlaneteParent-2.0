@@ -92,10 +92,10 @@ public class DevoirFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_devoir, container, false);
         recycler_devoir = view.findViewById(R.id.recycler_devoir);
 
-        visible = view.findViewById(R.id.visibility_devoir);
-        if (results.isEmpty()){
-            visible.setVisibility(View.VISIBLE);
-        }
+        //visible = view.findViewById(R.id.visibility_devoir);
+        //if (results.isEmpty()){
+          //  visible.setVisibility(View.VISIBLE);
+       // }
 
 
         NoteAdapter adapter = new NoteAdapter(getContext(), notes);
