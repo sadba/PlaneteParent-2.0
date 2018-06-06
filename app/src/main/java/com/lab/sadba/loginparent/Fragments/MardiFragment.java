@@ -70,7 +70,7 @@ public class MardiFragment extends Fragment {
         String code_classe = infosEleves.getCode_classe();
 
         realm = Realm.getDefaultInstance();
-        RealmResults<Temps> results = realm.where(Temps.class)
+        results = realm.where(Temps.class)
                 .equalTo("num_jour", "2")
                 .equalTo("code_classe", code_classe)
                 .findAllAsync();
@@ -91,6 +91,11 @@ public class MardiFragment extends Fragment {
 
         view = inflater.inflate(R.layout.fragment_mardi, container, false);
         recycler_mardi = view.findViewById(R.id.recycler_temps1);
+
+        visible = view.findViewById(R.id.visibility_mardi);
+        if (results.isEmpty()){
+            visible.setVisibility(View.VISIBLE);
+        }
 
 
         TempsAdapter adapter = new TempsAdapter(getContext(), temps);

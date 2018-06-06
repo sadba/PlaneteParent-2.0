@@ -66,11 +66,13 @@ public class SamediFragment extends Fragment {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
         value = sharedPreferences.getString("ien_enfant", "");
 
+
+
         InfosEleves infosEleves = realm.where(InfosEleves.class).equalTo("ien" ,value).findFirst();
         String code_classe = infosEleves.getCode_classe();
 
         realm = Realm.getDefaultInstance();
-        RealmResults<Temps> results = realm.where(Temps.class)
+         results = realm.where(Temps.class)
                 .equalTo("num_jour", "6")
                 .equalTo("code_classe", code_classe)
                 .findAllAsync();
@@ -92,6 +94,10 @@ public class SamediFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_samedi, container, false);
         recycler_samedi = view.findViewById(R.id.recycler_temps5);
 
+        visible = view.findViewById(R.id.visibility_samedi);
+        if (results.isEmpty()){
+            visible.setVisibility(View.VISIBLE);
+        }
 
         TempsAdapter adapter = new TempsAdapter(getContext(), temps);
         recycler_samedi.setLayoutManager(new LinearLayoutManager(getActivity()));

@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.lab.sadba.loginparent.Adapter.NoteAdapter;
@@ -44,7 +45,9 @@ public class CompoFragment extends Fragment {
     private RecyclerView recycler_compo;
     private String value;
     private Realm realm;
+    private RealmResults<Note> results;
     private List<Note> notes = new ArrayList<>();
+    private TextView visible;
 
     View view;
 
@@ -62,7 +65,7 @@ public class CompoFragment extends Fragment {
 
 
         realm = Realm.getDefaultInstance();
-        RealmResults<Note> results = realm.where(Note.class)
+         results = realm.where(Note.class)
                 .equalTo("devoir", "Composition")
                 .findAllAsync();
 
@@ -82,6 +85,11 @@ public class CompoFragment extends Fragment {
 
         view = inflater.inflate(R.layout.fragment_compo, container, false);
         recycler_compo = view.findViewById(R.id.recycler_compo);
+
+        visible = view.findViewById(R.id.visibility_compo);
+        if (results.isEmpty()){
+            visible.setVisibility(View.VISIBLE);
+        }
 
 
         NoteAdapter adapter = new NoteAdapter(getContext(), notes);

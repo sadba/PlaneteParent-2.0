@@ -16,6 +16,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.lab.sadba.loginparent.Adapter.EvalAdapter;
@@ -52,6 +53,7 @@ public class DevoirFragment extends Fragment {
     private Realm realm;
     private List<Note> notes = new ArrayList<>();
     private RealmResults<Note> results;
+    private TextView visible;
 
     View view;
 
@@ -69,7 +71,7 @@ public class DevoirFragment extends Fragment {
 
 
         realm = Realm.getDefaultInstance();
-        RealmResults<Note> results = realm.where(Note.class)
+        results = realm.where(Note.class)
                 .equalTo("devoir", "Devoir")
                 .findAllAsync();
 
@@ -89,6 +91,11 @@ public class DevoirFragment extends Fragment {
 
         view = inflater.inflate(R.layout.fragment_devoir, container, false);
         recycler_devoir = view.findViewById(R.id.recycler_devoir);
+
+        visible = view.findViewById(R.id.visibility_devoir);
+        if (results.isEmpty()){
+            visible.setVisibility(View.VISIBLE);
+        }
 
 
         NoteAdapter adapter = new NoteAdapter(getContext(), notes);

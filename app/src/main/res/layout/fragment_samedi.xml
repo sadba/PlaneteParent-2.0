@@ -12,11 +12,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Pas de cours pour ce jour"
+        android:textSize="25sp"
+        android:gravity="center"
         android:paddingTop="300dp"
         android:paddingLeft="100dp"
         android:textStyle="bold"
         android:visibility="gone"
-        android:id="@+id/visibility_lundi"
+        android:id="@+id/visibility_samedi"
 
         />
 

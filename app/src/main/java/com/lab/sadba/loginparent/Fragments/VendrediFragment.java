@@ -70,7 +70,7 @@ public class VendrediFragment extends Fragment {
         String code_classe = infosEleves.getCode_classe();
 
         realm = Realm.getDefaultInstance();
-        RealmResults<Temps> results = realm.where(Temps.class)
+         results = realm.where(Temps.class)
                 .equalTo("num_jour", "5")
                 .equalTo("code_classe", code_classe)
                 .findAllAsync();
@@ -91,6 +91,11 @@ public class VendrediFragment extends Fragment {
 
         view = inflater.inflate(R.layout.fragment_vendredi, container, false);
         recycler_vendredi = view.findViewById(R.id.recycler_temps4);
+
+        visible = view.findViewById(R.id.visibility_vendredi);
+        if (results.isEmpty()){
+            visible.setVisibility(View.VISIBLE);
+        }
 
 
         TempsAdapter adapter = new TempsAdapter(getContext(), temps);

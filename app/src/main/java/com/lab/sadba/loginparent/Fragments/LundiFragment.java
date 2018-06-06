@@ -63,7 +63,7 @@ public class LundiFragment extends Fragment {
         String code_classe = infosEleves.getCode_classe();
 
         realm = Realm.getDefaultInstance();
-        RealmResults<Temps> results = realm.where(Temps.class)
+        results = realm.where(Temps.class)
                 .equalTo("num_jour", "1")
                 .equalTo("code_classe", code_classe)
                 .findAllAsync();
@@ -84,6 +84,11 @@ public class LundiFragment extends Fragment {
 
         view = inflater.inflate(R.layout.fragment_lundi, container, false);
         recycler_lundi = view.findViewById(R.id.recycler_temps);
+
+        visible = view.findViewById(R.id.visibility_lundi);
+        if (results.isEmpty()){
+            visible.setVisibility(View.VISIBLE);
+        }
 
 
         TempsAdapter adapter = new TempsAdapter(getContext(), temps);
