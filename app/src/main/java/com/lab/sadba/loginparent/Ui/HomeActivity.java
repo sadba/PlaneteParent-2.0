@@ -9,6 +9,7 @@ import android.net.NetworkInfo;
 import android.os.Build;
 import android.preference.PreferenceManager;
 import android.support.annotation.RequiresApi;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
@@ -45,6 +46,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     private List<Note> notes = new ArrayList<>();
     private CardView tempsCard, notesCard, evalCard, infosCard;
 
+
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @SuppressLint("CutPasteId")
     @Override
@@ -64,7 +66,22 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         infosCard.setOnClickListener(this);
 
         toolbar =  findViewById(R.id.toolbar);
+        toolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
+
+
         toolbar.setTitle("Dashboard");
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+
+                // Your code
+                finish();
+            }
+        });
+
+
 
          ien = getIntent().getStringExtra("ien_enfant");
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());

@@ -22,6 +22,8 @@
 
     </android.support.design.widget.AppBarLayout>
 
+
+
     <LinearLayout
         android:orientation="horizontal"
         android:gravity="center"
@@ -145,7 +147,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="L'ensemble des evaluations programmees"
+                    android:text="L'ensemble des evaluations programmées"
                     android:textColor="@android:color/darker_gray"
                     android:padding="5dp"/>
             </LinearLayout>

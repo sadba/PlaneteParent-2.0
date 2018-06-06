@@ -8,6 +8,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.Toast;
 
 import com.lab.sadba.loginparent.Adapter.TempsAdapter;
@@ -52,7 +53,20 @@ public class EmploiActivity extends AppCompatActivity {
         viewPager = findViewById(R.id.viewpager_id);
 
         toolbar =  findViewById(R.id.toolbarEmploi);
-        toolbar.setTitle("EMPLOI DU TEMPS");
+        toolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
+
+
+        toolbar.setTitle("Emploi du temps");
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+
+                // Your code
+                finish();
+            }
+        });
 
 
 

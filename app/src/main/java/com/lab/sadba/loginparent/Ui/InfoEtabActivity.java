@@ -8,6 +8,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,6 +40,7 @@ public class InfoEtabActivity extends AppCompatActivity {
     private Realm realm;
     TextView tel, cycle, etab;
     IMyAPI mService;
+    android.support.v7.widget.Toolbar toolbar;
 
 
     @Override
@@ -51,6 +54,23 @@ public class InfoEtabActivity extends AppCompatActivity {
         String ien = getIntent().getStringExtra("ien_bis");
         Enfant enfant = realm.where(Enfant.class).equalTo("ien_eleve", ien).findFirst();
         String code = enfant.getId_etablissement();
+
+         toolbar =  findViewById(R.id.toolbar_infos);
+
+        toolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
+
+
+
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+
+                // Your code
+                finish();
+            }
+        });
 
         tel = findViewById(R.id.tel);
         cycle = findViewById(R.id.libelle_nom_cycle);

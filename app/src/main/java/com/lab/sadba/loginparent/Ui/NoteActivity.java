@@ -14,6 +14,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.Toast;
 
 import com.lab.sadba.loginparent.Adapter.EvalAdapter;
@@ -62,7 +63,21 @@ public class NoteActivity extends AppCompatActivity {
         viewPager = findViewById(R.id.viewpager_id);
 
         toolbar = findViewById(R.id.toolbarNote);
-        toolbar.setTitle("NOTES ET BULLETINS");
+        toolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
+
+
+        toolbar.setTitle("Notes et Bulletins");
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+
+                // Your code
+                finish();
+            }
+        });
+
 
 
         Bundle bundle = new Bundle();

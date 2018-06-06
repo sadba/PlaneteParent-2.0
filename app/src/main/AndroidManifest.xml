@@ -20,7 +20,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".Ui.RegisterActivity" />
-        <activity android:name=".Ui.HomeActivity" />
+        <activity android:name=".Ui.HomeActivity"/>
         <activity
             android:name=".Ui.TestActivity"
             android:label="@string/title_activity_test"

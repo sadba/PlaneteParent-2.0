@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.Toast;
 
 import com.lab.sadba.loginparent.Adapter.EvalAdapter;
@@ -45,12 +46,21 @@ public class EvalActivity extends AppCompatActivity {
         recyclerVIewEval = findViewById(R.id.recycler_eval);
 
         toolbar =  findViewById(R.id.toolbar_eval);
-        toolbar.setTitle("Evaluations Programmees");
 
-       /* Realm.init(getApplicationContext());
-        realm = Realm.getDefaultInstance();
-        IMyAPI api = ApiClient2.getInstance()
-                .getIMyAPI();*/
+        toolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
+
+
+        toolbar.setTitle("Evaluations Programées");
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+
+                // Your code
+                finish();
+            }
+        });
 
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
