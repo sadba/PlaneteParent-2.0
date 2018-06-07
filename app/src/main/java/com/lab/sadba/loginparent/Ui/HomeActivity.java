@@ -72,21 +72,27 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         toolbar =  findViewById(R.id.toolbar);
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
 
+        ien = getIntent().getStringExtra("ien_enfant");
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString("ien_enfant", ien);
+        editor.apply();
+
 
 
         realm = Realm.getDefaultInstance();
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        String value = sharedPreferences.getString("ien_enfant", "");
-        InfosEleves infosEleves = realm.where(InfosEleves.class).equalTo("ien" ,value).findFirst();
-        //String prenom = infosEleves.getPrenom_eleve();
-        //String nom = infosEleves.getNom_eleve();
+        //String value = sharedPreferences.getString("ien_enfant", "");
+        Enfant enfant = realm.where(Enfant.class).equalTo("ien_eleve" ,ien).findFirst();
+        String prenom = enfant.getPrenom_eleve();
+        String nom = enfant.getNom_eleve();
 
-        //String lettre = prenom.substring(0,1);
+        String lettre = prenom.substring(0,1);
 
-        //Toast.makeText(this, prenom, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, prenom, Toast.LENGTH_SHORT).show();
 
          toolbar.setTitle("Dashboard");
-        // persoTitle.setText(lettre+"."+nom);
+         persoTitle.setText(lettre+"."+nom);
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
 
@@ -100,11 +106,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
 
 
-        ien = getIntent().getStringExtra("ien_enfant");
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.putString("ien_enfant", ien);
-        editor.apply();
+
 
 
         Realm.init(getApplicationContext());
