@@ -3,6 +3,7 @@ package com.lab.sadba.loginparent.Ui;
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -13,6 +14,10 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.lab.sadba.loginparent.Adapter.EnfantAdapter;
 import com.lab.sadba.loginparent.Model.Enfant;
@@ -35,6 +40,47 @@ public class EnfantActivity extends AppCompatActivity {
     private Realm realm;
     ProgressDialog progressDoalog;
     android.support.v7.widget.Toolbar toolbar;
+    SharedPreferences sp;
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        //MenuInflater menuInflater = getMenuInflater();
+        getMenuInflater().inflate(R.menu.menu_action_bar, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        sp = getSharedPreferences("btn_login", MODE_PRIVATE);
+        if (sp.getBoolean("logged", true)){
+            goToMainActivity();
+        }
+
+        int id = item.getItemId();
+        switch (item.getItemId()) {
+            // action with ID action_refresh was selected
+            case R.id.action_logout:
+                sp.edit().putBoolean("logged", false).apply();
+                Intent intent = new Intent(EnfantActivity.this, MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+                finish();
+                break;
+            default:
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
+
+    }
+
+    private void goToMainActivity() {
+        Intent i = new Intent(this, MainActivity.class);
+        startActivity(i);
+    }
+
+
     @SuppressLint("CheckResult")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +88,7 @@ public class EnfantActivity extends AppCompatActivity {
         setContentView(R.layout.activity_enfant);
 
         toolbar =  findViewById(R.id.toolbar_enfant);
+        setSupportActionBar(toolbar);
         toolbar.setTitle("Liste des enfants");
 
 
@@ -99,6 +146,8 @@ public class EnfantActivity extends AppCompatActivity {
 
 
     }
+
+
 
     private List<Enfant> getDBEnfants(){
         return realm.copyFromRealm(realm.where(Enfant.class).findAll());

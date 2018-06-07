@@ -48,11 +48,7 @@ public class MainActivity extends AppCompatActivity {
         edt_password = findViewById(R.id.edt_password);
         btn_login = findViewById(R.id.btn_login);
 
-        /*User user = new User();
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putString("ien_Parent", user.getIen());
-        editor.apply();*/
+
 
         sp = getSharedPreferences("btn_login", MODE_PRIVATE);
         sp1 = getSharedPreferences("ien_parent", MODE_PRIVATE);
