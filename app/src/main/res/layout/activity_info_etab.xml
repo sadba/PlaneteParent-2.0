@@ -79,17 +79,18 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_toRightOf="@+id/image_cycle"
-                android:text="Cycle "
-                android:textSize="24sp" />
+                android:text="Cycle d'Enseignement "
+                android:textSize="20sp" />
             <TextView
                 android:id="@+id/libelle_nom_cycle"
                 android:paddingTop="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
+                android:layout_gravity="right"
                 android:layout_toRightOf="@+id/libelle_cycle"
-                android:text="Nom cycle"
-                android:textSize="24sp" />
+                android:text="Nom cycle \n"
+                android:textSize="20sp" />
         </RelativeLayout>
 
         <RelativeLayout

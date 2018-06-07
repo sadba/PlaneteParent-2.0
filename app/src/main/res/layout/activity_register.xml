@@ -169,8 +169,8 @@
                             android:layout_marginRight="10dp"
                             android:background="@android:color/transparent"
                             android:id="@+id/edt_tel"
-                            android:hint="Telephone"
-                            android:inputType="text"
+                            android:hint="Code sms reçu"
+                            android:inputType="number"
                             android:textSize="16sp"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent" />

@@ -73,16 +73,12 @@ public class EvalActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         value = sharedPreferences.getString("ien_enfant", "");
 
-        //Enfant enfant = realm.where(Enfant.class).findFirst();
-
-
-
         //getEvaluations(value);
         assert value != null;
         if (isNetworkAvailable(this)) {
             getEvaluations(value);
         }else {
-
+            progressDoalog.dismiss();
             realm = Realm.getDefaultInstance();
             RealmResults<Evaluation> results = realm.where(Evaluation.class)
                     .findAll();
@@ -133,6 +129,7 @@ public class EvalActivity extends AppCompatActivity {
                             progressDoalog.dismiss();
                             Toast.makeText(EvalActivity.this, "Pas d'evaluations programmees pour le moment", Toast.LENGTH_LONG).show();
                         } else{
+
                             EvalAdapter adapter = new EvalAdapter(getApplicationContext(), evals);
                             recyclerVIewEval.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
                             recyclerVIewEval.setItemAnimator(new DefaultItemAnimator());

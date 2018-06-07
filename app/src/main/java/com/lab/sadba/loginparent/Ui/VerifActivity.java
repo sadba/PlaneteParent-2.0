@@ -66,8 +66,8 @@ public class VerifActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<VerifUser> call, Response<VerifUser> response) {
                         VerifUser result = response.body();
-                        if (result.getCode() == "1"){
-                            Toast.makeText(VerifActivity.this, "Les donnees saisies sont incorrectes", Toast.LENGTH_LONG).show();
+                        if (result.getCode().equals("1")){
+                            Toast.makeText(VerifActivity.this, result.getMessage(), Toast.LENGTH_LONG).show();
                         } else {
                             SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                             SharedPreferences.Editor editor = preferences.edit();
@@ -81,7 +81,7 @@ public class VerifActivity extends AppCompatActivity {
 
                     @Override
                     public void onFailure(Call<VerifUser> call, Throwable t) {
-                        Toast.makeText(VerifActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(VerifActivity.this, "Veuillez vérifier votre connection", Toast.LENGTH_LONG).show();
                     }
                 });
     }

@@ -3,7 +3,7 @@ package com.lab.sadba.loginparent.Model;
 public class PostRegisterUser {
 
     String ien;
-    String telephone;
+    String code_verif;
     String password;
 
     public PostRegisterUser() {
@@ -17,12 +17,12 @@ public class PostRegisterUser {
         this.ien = ien;
     }
 
-    public String getTelephone() {
-        return telephone;
+    public String getCode_verif() {
+        return code_verif;
     }
 
-    public void setTel(String telephone) {
-        this.telephone = telephone;
+    public void setCode_verif(String telephone) {
+        this.code_verif = telephone;
     }
 
     public String getPassword() {

@@ -64,19 +64,19 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String ien = edt_ien.getText().toString();
-                String tel = edt_tel.getText().toString();
+                String code_verif = edt_tel.getText().toString();
                 String password = edt_password.getText().toString();
                 String confirm_password = edt_password_confirm.getText().toString();
                 if (TextUtils.isEmpty(ien)){
                     edt_ien.setError("L'IEN ne doit pas etre vide");
-                } else if (TextUtils.isEmpty(tel)){
+                } else if (TextUtils.isEmpty(code_verif)){
                     edt_tel.setError("Le CNI ne doit pas etre vide");
                 } else if (TextUtils.isEmpty(password) && !isPasswordValid(password)){
                     edt_password.setError("Mot de passe invalide");
                 } else if (!password.equals(confirm_password)) {
                     edt_password_confirm.setError("Les mots de passe ne sont pas identiques");
                 } else {
-                    createNewUser(ien,tel,password);
+                    createNewUser(ien,password,code_verif);
                 }
 
             }
@@ -85,10 +85,10 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
-    private void createNewUser(String ien, String tel, String password) {
+    private void createNewUser(String ien, String password, String tel) {
         PostRegisterUser postRegisterUser = new PostRegisterUser();
         postRegisterUser.setIen(ien);
-        postRegisterUser.setTel(tel);
+        postRegisterUser.setCode_verif(tel);
         postRegisterUser.setPassword(password);
         mService.registerUser(postRegisterUser)
                 .enqueue(new Callback<RegisterUser>() {
