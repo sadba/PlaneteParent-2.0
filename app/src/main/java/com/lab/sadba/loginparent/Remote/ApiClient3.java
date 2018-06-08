@@ -9,12 +9,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiClient3 {
 
+   // private static final String BASE_URL = "http://api.simendev.com/"; https://planeteapi.education.sn/
     private static final String BASE_URL = "http://api.simendev.com/";
-    //private static final String BASE_URL = "http://simen_api.education.sn/";
-    //private static final String BASE_URLP = "http://api.simendev.com/";
 
     private static Retrofit retrofit = null;
-    //private static Retrofit retrofit1 = null;
 
     public static Retrofit getRetrofit() {
         Gson gson = new GsonBuilder()

@@ -1,5 +1,7 @@
 package com.lab.sadba.loginparent.Ui;
 
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
@@ -26,6 +28,7 @@ public class VerifActivity extends AppCompatActivity {
     EditText edt_ien, edt_cni;
     Button btn_verif;
     IMyAPI mService;
+    AlertDialog progressDoalog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,18 +64,23 @@ public class VerifActivity extends AppCompatActivity {
         PostVerifUser postVerifUser = new PostVerifUser();
         postVerifUser.setIen(ien);
         postVerifUser.setCni(cni);
+        progressDoalog = new ProgressDialog(VerifActivity.this);
+        progressDoalog.setMessage("Verification des donnees...");
+        progressDoalog.show();
         mService.verifUser(postVerifUser)
                 .enqueue(new Callback<VerifUser>() {
                     @Override
                     public void onResponse(Call<VerifUser> call, Response<VerifUser> response) {
                         VerifUser result = response.body();
                         if (result.getCode().equals("1")){
+                            progressDoalog.dismiss();
                             Toast.makeText(VerifActivity.this, result.getMessage(), Toast.LENGTH_LONG).show();
                         } else {
                             SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                             SharedPreferences.Editor editor = preferences.edit();
                             editor.putString("ien_Parent", result.getIen_parent());
                             editor.apply();
+                            progressDoalog.dismiss();
                             //Toast.makeText(getApplicationContext(), result.getIen_parent(),Toast.LENGTH_LONG).show();
                             startActivity(new Intent(VerifActivity.this, RegisterActivity.class));
                         }
@@ -81,6 +89,7 @@ public class VerifActivity extends AppCompatActivity {
 
                     @Override
                     public void onFailure(Call<VerifUser> call, Throwable t) {
+                        progressDoalog.dismiss();
                         Toast.makeText(VerifActivity.this, "Veuillez vérifier votre connection", Toast.LENGTH_LONG).show();
                     }
                 });

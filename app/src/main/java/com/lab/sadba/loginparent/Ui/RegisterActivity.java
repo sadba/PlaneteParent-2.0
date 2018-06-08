@@ -1,5 +1,6 @@
 package com.lab.sadba.loginparent.Ui;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
@@ -27,6 +28,7 @@ public class RegisterActivity extends AppCompatActivity {
     TextView txt_sign_in;
     EditText edt_ien, edt_password,edt_password_confirm, edt_tel;
     Button btn_register;
+    ProgressDialog progressDoalog;
 
     IMyAPI mService;
 
@@ -90,14 +92,19 @@ public class RegisterActivity extends AppCompatActivity {
         postRegisterUser.setIen(ien);
         postRegisterUser.setCode_verif(tel);
         postRegisterUser.setPassword(password);
+        progressDoalog = new ProgressDialog(RegisterActivity.this);
+        progressDoalog.setMessage("Verification des donnees...");
+        progressDoalog.show();
         mService.registerUser(postRegisterUser)
                 .enqueue(new Callback<RegisterUser>() {
                     @Override
                     public void onResponse(Call<RegisterUser> call, Response<RegisterUser> response) {
                         RegisterUser result = response.body();
                         if (result.getCode().equals("1")) {
+                            progressDoalog.dismiss();
                             Toast.makeText(RegisterActivity.this, result.getMessage(), Toast.LENGTH_LONG).show();
                         } else {
+                            progressDoalog.dismiss();
                             startActivity(new Intent(RegisterActivity.this, MainActivity.class));
 
                             /*gotToHomeActivity();
@@ -108,6 +115,8 @@ public class RegisterActivity extends AppCompatActivity {
 
                     @Override
                     public void onFailure(Call<RegisterUser> call, Throwable t) {
+                        progressDoalog.dismiss();
+                        Toast.makeText(RegisterActivity.this, "Veuillez vérifier votre connection", Toast.LENGTH_LONG).show();
 
                     }
                 });

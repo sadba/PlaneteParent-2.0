@@ -108,13 +108,11 @@ public class EnfantActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString("ien_Enfant", enf.getIen_eleve());
         editor.putString("code_etab", enf.getId_etablissement());
-       // editor.putString("prenom", enf.getPrenom_eleve());
-        //editor.putString("nom", enf.getNom_eleve());
         editor.apply();
 
         Observable<List<Enfant>> dbObservable =  Observable.create(e -> getDBEnfants());
 
-        if (isNetworkAvailable()){
+        if (isNetworkAvailable(getApplicationContext())){
             api.getEnfants(user.getIen())
                     .subscribeOn(Schedulers.io())
                     .observeOn(Schedulers.computation())
@@ -166,10 +164,28 @@ public class EnfantActivity extends AppCompatActivity {
         recyclerEnfant.setAdapter(adapter);
     }
 
-    private boolean isNetworkAvailable(){
-        ConnectivityManager cm = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo info = cm.getActiveNetworkInfo();
-        return  info!=null && info.isConnected();
+    public static boolean isNetworkAvailable(Context context) {
+        boolean status = false;
+        try {
+            ConnectivityManager cm = (ConnectivityManager) context
+                    .getSystemService(Context.CONNECTIVITY_SERVICE);
+            assert cm != null;
+            NetworkInfo netInfo = cm.getNetworkInfo(0);
+
+            if (netInfo != null
+                    && netInfo.getState() == NetworkInfo.State.CONNECTED) {
+                status = true;
+            } else {
+                netInfo = cm.getNetworkInfo(1);
+                if (netInfo != null
+                        && netInfo.getState() == NetworkInfo.State.CONNECTED)
+                    status = true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return status;
     }
 
     @Override
