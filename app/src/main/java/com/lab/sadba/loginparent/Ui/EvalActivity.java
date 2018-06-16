@@ -127,10 +127,10 @@ public class EvalActivity extends AppCompatActivity {
                         }
                         if (evals.isEmpty()){
                             progressDoalog.dismiss();
-                            Toast.makeText(EvalActivity.this, "Pas d'evaluations programmees pour le moment", Toast.LENGTH_LONG).show();
+                            Toast.makeText(EvalActivity.this, "Pas d'évaluations programmées pour le moment", Toast.LENGTH_LONG).show();
                         } else{
 
-                            EvalAdapter adapter = new EvalAdapter(getApplicationContext(), evals);
+                            EvalAdapter adapter = new EvalAdapter(EvalActivity.this, evals);
                             recyclerVIewEval.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
                             recyclerVIewEval.setItemAnimator(new DefaultItemAnimator());
                             //recycler_lundi.setItemAnimator();
@@ -140,7 +140,7 @@ public class EvalActivity extends AppCompatActivity {
 
                     @Override
                     public void onError(Throwable e) {
-                        Toast.makeText(getApplicationContext(), e.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Veuillez vérifier votre connection internet", Toast.LENGTH_LONG).show();
                     }
 
                     @Override

@@ -5,6 +5,8 @@
     tools:context=".Ui.EnfantActivity">
     <item
         android:id="@+id/action_logout"
+        android:orderInCategory="100"
         android:title="Se deconnecter"
+        app:showAsAction="never"
         android:icon="@drawable/ic_more_vert_black_24dp" />
 </menu>

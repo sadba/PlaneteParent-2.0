@@ -108,6 +108,10 @@ public class MainActivity extends AppCompatActivity {
 
                             gotToHomeActivity();
                             sp.edit().putBoolean("logged", true).apply();
+                            //SharedPreferences.Editor editor = sp.edit();
+                            //editor.remove("logged");
+                           // editor.commit();
+                            //finish();
                             //sp1.edit().putString("ien_parent", "").apply();
                             realm = Realm.getDefaultInstance();
                             realm.beginTransaction();

@@ -17,6 +17,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.lab.sadba.loginparent.Adapter.EnfantAdapter;
@@ -58,17 +59,29 @@ public class EnfantActivity extends AppCompatActivity {
         }
 
         int id = item.getItemId();
-        switch (item.getItemId()) {
+        //switch (item.getItemId()) {
             // action with ID action_refresh was selected
-            case R.id.action_logout:
-                sp.edit().putBoolean("logged", false).apply();
-                Intent intent = new Intent(EnfantActivity.this, MainActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
-                finish();
-                break;
-            default:
-                break;
+          //  case R.id.action_logout:
+               // sp.edit().putBoolean("logged", false).apply();
+                //Intent intent = new Intent(EnfantActivity.this, MainActivity.class);
+               // intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+               // startActivity(intent);
+               // finish();
+              //  break;
+           // default:
+               // break;
+       // }
+
+        if (id == R.id.action_logout) {
+            sp.edit().putBoolean("logged", false).apply();
+            SharedPreferences.Editor editor = sp.edit();
+            editor.remove("logged");
+            editor.commit();
+            finish();
+            //Intent intent = new Intent(EnfantActivity.this, MainActivity.class);
+            Intent intent = new Intent(this, MainActivity.class);
+            this.startActivity(intent);
+            return true;
         }
 
         return super.onOptionsItemSelected(item);
@@ -78,7 +91,12 @@ public class EnfantActivity extends AppCompatActivity {
     private void goToMainActivity() {
         Intent i = new Intent(this, MainActivity.class);
         startActivity(i);
+        //close(view);
     }
+
+    //public void close(View view){
+       // finish();
+   // }
 
 
     @SuppressLint("CheckResult")
@@ -158,7 +176,7 @@ public class EnfantActivity extends AppCompatActivity {
 
     void setAdapterData(List<Enfant> enfants){
         progressDoalog.dismiss();
-        EnfantAdapter adapter = new EnfantAdapter(getApplicationContext(), enfants);
+        EnfantAdapter adapter = new EnfantAdapter(EnfantActivity.this, enfants);
         recyclerEnfant.setLayoutManager(new LinearLayoutManager(this));
         recyclerEnfant.setItemAnimator(new DefaultItemAnimator());
         recyclerEnfant.setAdapter(adapter);

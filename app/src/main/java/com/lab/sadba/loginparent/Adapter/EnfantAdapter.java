@@ -46,6 +46,7 @@ public class EnfantAdapter extends RecyclerView.Adapter<EnfantAdapter.EnfantView
                 //context.startActivity(new Intent(EnfantActivity.this, MenuActivity.class));
                 Intent intent = new Intent(context, HomeActivity.class);
                 intent.putExtra("ien_enfant", enfant.getIen_eleve());
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
 
             }

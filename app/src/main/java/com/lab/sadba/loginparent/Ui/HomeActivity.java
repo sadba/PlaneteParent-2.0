@@ -89,7 +89,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
         String lettre = prenom.substring(0,1);
 
-        Toast.makeText(this, prenom, Toast.LENGTH_SHORT).show();
+      //  Toast.makeText(this, prenom, Toast.LENGTH_SHORT).show();
 
          toolbar.setTitle("Dashboard");
          persoTitle.setText(lettre+"."+nom);
@@ -158,7 +158,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
                     @Override
                     public void onError(Throwable e) {
-                        Toast.makeText(getApplicationContext(), e.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Veuillez vérifier votre connection internet", Toast.LENGTH_LONG).show();
                     }
 
                     @Override
@@ -214,7 +214,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
                     @Override
                     public void onError(Throwable e) {
-                        Toast.makeText(getApplicationContext(), e.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Veuillez vérifier votre connection internet", Toast.LENGTH_LONG).show();
                     }
 
                     @Override
@@ -265,7 +265,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
                     @Override
                     public void onError(Throwable e) {
-                        Toast.makeText(getApplicationContext(), e.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Veuillez vérifier votre connection internet", Toast.LENGTH_LONG).show();
                     }
 
                     @Override
