@@ -78,6 +78,8 @@ public class MainActivity extends AppCompatActivity {
                     edt_ien.setError("Ien ne doit pas etre vide");
                 } else {
                     authenticateUser(ien, password);
+                    edt_ien.getText().clear();
+                    edt_password.getText().clear();
                 }
 
             }
