@@ -8,23 +8,16 @@
     android:background="@drawable/background"
     tools:context=".Ui.InfoEtabActivity">
 
-    <android.support.design.widget.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
-
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar_infos"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/colorPrimary"/>
+    <include
+        layout="@layout/toolbar_simple_layout"/>
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="150dp"
+            android:background="@color/colorPrimaryDark"
             android:src="@drawable/etablissementxxxhdpi"/>
 
-    </android.support.design.widget.AppBarLayout>
+
 
     <LinearLayout
         android:orientation="vertical"

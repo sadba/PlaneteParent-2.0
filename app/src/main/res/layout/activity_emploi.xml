@@ -7,18 +7,8 @@
     android:orientation="vertical"
     tools:context=".Ui.EmploiActivity">
 
-    <android.support.design.widget.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
-
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbarEmploi"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/colorPrimary"/>
-
-    </android.support.design.widget.AppBarLayout>
+    <include
+        layout="@layout/toolbar_simple_layout"/>
 
 
     <android.support.design.widget.TabLayout
@@ -29,7 +19,7 @@
         android:id="@+id/tablayout_id"
         app:tabTextColor="@color/tabtextcolor"
         app:tabIndicatorColor="@color/tabindicatorcolor"
-        android:background="@color/colorPrimary" />
+        android:background="@color/colorPrimaryDark" />
 
     <android.support.v4.view.ViewPager
         android:layout_width="match_parent"

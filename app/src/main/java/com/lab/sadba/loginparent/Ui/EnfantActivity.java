@@ -105,7 +105,7 @@ public class EnfantActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enfant);
 
-        toolbar =  findViewById(R.id.toolbar_enfant);
+        toolbar =  findViewById(R.id.toolbar_emploi);
         setSupportActionBar(toolbar);
         toolbar.setTitle("Liste des enfants");
 

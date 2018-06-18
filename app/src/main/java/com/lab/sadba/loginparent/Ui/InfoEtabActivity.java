@@ -55,7 +55,7 @@ public class InfoEtabActivity extends AppCompatActivity {
         Enfant enfant = realm.where(Enfant.class).equalTo("ien_eleve", ien).findFirst();
         String code = enfant.getId_etablissement();
 
-         toolbar =  findViewById(R.id.toolbar_infos);
+         toolbar =  findViewById(R.id.toolbar_emploi);
 
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
 
