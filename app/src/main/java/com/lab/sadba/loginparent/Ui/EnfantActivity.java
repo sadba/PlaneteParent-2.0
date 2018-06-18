@@ -124,7 +124,7 @@ public class EnfantActivity extends AppCompatActivity {
         Enfant enf = new Enfant();
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         SharedPreferences.Editor editor = preferences.edit();
-        editor.putString("ien_Enfant", enf.getIen_eleve());
+        editor.putString("ien_enfant", enf.getIen_eleve());
         editor.putString("code_etab", enf.getId_etablissement());
         editor.apply();
 
