@@ -25,7 +25,6 @@
             android:name=".Ui.TestActivity"
             android:label="@string/title_activity_test"
             android:theme="@style/AppTheme" />
-        <activity android:name=".Ui.VerifActivity" />
         <activity android:name=".Ui.EnfantActivity" />
         <activity android:name=".Ui.MenuActivity" />
         <activity android:name=".Ui.EmploiActivity" />
