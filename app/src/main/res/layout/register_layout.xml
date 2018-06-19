@@ -58,14 +58,7 @@
 
         </LinearLayout>
 
-        <Button
-            android:id="@+id/btn_dialog_register"
-            android:text="Valider"
-            android:textColor="@android:color/white"
-            android:background="@color/colorPrimaryDark"
-            android:layout_alignParentBottom="true"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+
 
     </LinearLayout>
 

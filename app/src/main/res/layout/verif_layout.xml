@@ -29,7 +29,7 @@
 
             <com.rengwuxian.materialedittext.MaterialEditText
                 android:id="@+id/edt_id_card"
-                android:hint="Carte d'Identité Nationale"
+                android:hint="Numéro Carte d'Identité Nationale"
                 android:textSize="18sp"
                 android:inputType="text"
                 android:layout_width="match_parent"
@@ -40,14 +40,7 @@
 
         </LinearLayout>
 
-        <Button
-            android:id="@+id/btn_verify"
-            android:text="Continuer"
-            android:textColor="@android:color/white"
-            android:background="@color/colorPrimaryDark"
-            android:layout_alignParentBottom="true"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+
 
     </LinearLayout>
 
