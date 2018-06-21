@@ -59,18 +59,6 @@ public class EnfantActivity extends AppCompatActivity {
         }
 
         int id = item.getItemId();
-        //switch (item.getItemId()) {
-            // action with ID action_refresh was selected
-          //  case R.id.action_logout:
-               // sp.edit().putBoolean("logged", false).apply();
-                //Intent intent = new Intent(EnfantActivity.this, MainActivity.class);
-               // intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-               // startActivity(intent);
-               // finish();
-              //  break;
-           // default:
-               // break;
-       // }
 
         if (id == R.id.action_logout) {
             sp.edit().putBoolean("logged", false).apply();
@@ -94,11 +82,6 @@ public class EnfantActivity extends AppCompatActivity {
         //close(view);
     }
 
-    //public void close(View view){
-       // finish();
-   // }
-
-
     @SuppressLint("CheckResult")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,6 +91,15 @@ public class EnfantActivity extends AppCompatActivity {
         toolbar =  findViewById(R.id.toolbar_emploi);
         setSupportActionBar(toolbar);
         toolbar.setTitle("Liste des enfants");
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+
+                // Your code
+                finish();
+            }
+        });
 
 
         progressDoalog = new ProgressDialog(EnfantActivity.this);

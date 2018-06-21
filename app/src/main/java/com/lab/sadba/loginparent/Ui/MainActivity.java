@@ -236,9 +236,7 @@ public class MainActivity extends AppCompatActivity {
                             final android.app.AlertDialog watingDialog = new SpotsDialog(MainActivity.this);
                             watingDialog.show();
                             watingDialog.setTitle("En cours...");
-                            // progressDoalog = new ProgressDialog(RegisterActivity.this);
-                            // progressDoalog.setMessage("Verification des donnees...");
-                            //progressDoalog.show();
+
                             mService.registerUser(postRegisterUser)
                                     .enqueue(new Callback<RegisterUser>() {
                                         @Override
