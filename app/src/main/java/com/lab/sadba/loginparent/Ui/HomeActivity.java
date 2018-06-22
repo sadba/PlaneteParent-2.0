@@ -15,12 +15,15 @@ import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.lab.sadba.loginparent.Adapter.BulletinAdapter;
 import com.lab.sadba.loginparent.Adapter.EvalAdapter;
 import com.lab.sadba.loginparent.Adapter.TempsAdapter;
+import com.lab.sadba.loginparent.Model.Bulletin;
 import com.lab.sadba.loginparent.Model.Enfant;
 import com.lab.sadba.loginparent.Model.Evaluation;
 import com.lab.sadba.loginparent.Model.InfosEleves;
@@ -34,6 +37,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.functions.Consumer;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 import io.realm.Realm;
@@ -46,8 +51,15 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     private Realm realm;
     private List<Temps> evals = new ArrayList<>();
     private List<Note> notes = new ArrayList<>();
+    private List<Bulletin> bulletins = new ArrayList<>();
     private CardView tempsCard, notesCard, evalCard, infosCard;
     TextView persoTitle;
+    RecyclerView recycler_bulletin;
+
+    //RxJava
+   // CompositeDisposable compositeDisposable = new CompositeDisposable();
+
+    IMyAPI mService;
 
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -89,7 +101,10 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
         String lettre = prenom.substring(0,1);
 
-      //  Toast.makeText(this, prenom, Toast.LENGTH_SHORT).show();
+       // InfosEleves infosEleves = realm.where(InfosEleves.class).findFirst();
+       // String code_classe = infosEleves.getCode_classe();
+
+       //Toast.makeText(this, code_classe, Toast.LENGTH_SHORT).show();
 
          toolbar.setTitle("Dashboard");
          persoTitle.setText(lettre+"."+nom);
@@ -110,12 +125,13 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
 
         Realm.init(getApplicationContext());
-        //getEmploi(ien);
         assert ien != null;
+        getBulletins(ien);
         if (isNetworkAvailable(this)) {
             getEmploi(ien);
             getInfos(ien);
             getNotes(ien);
+
         }
 
 
@@ -123,6 +139,53 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
 
     }
+
+    private void getBulletins(String ien) {
+        //realm = Realm.getDefaultInstance();
+        IMyAPI service = ApiClient3.getRetrofit().create(IMyAPI.class);
+        service.getBulletins(ien)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new DisposableObserver<List<Bulletin>>() {
+                    @Override
+                    public void onNext(List<Bulletin> bulletins) {
+                       // realm = Realm.getDefaultInstance();
+                        //Toast.makeText(HomeActivity.this, String.valueOf(bulletins.size()), Toast.LENGTH_SHORT).show();
+
+                        try{
+                            realm = Realm.getDefaultInstance();
+                            realm.executeTransaction(realm1 -> {
+                                for (Bulletin bulletin: bulletins){
+                                    Bulletin bulletin1 = new Bulletin();
+                                    bulletin1.setId_semestre(bulletin.getId_semestre());
+                                    bulletin1.setChemin_bulletin(bulletin.getChemin_bulletin());
+                                    bulletin1.setLibelle_semestre(bulletin.getLibelle_semestre());
+
+
+                                    realm.copyToRealmOrUpdate(bulletin1);
+                                }
+                            });
+                        } catch (Exception e){
+                            Toast.makeText(HomeActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                            realm.close();
+                        }
+
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Toast.makeText(getApplicationContext(), "Veuillez vérifier votre connection internet", Toast.LENGTH_LONG).show();
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+
 
     private void getNotes(String ien) {
         realm = Realm.getDefaultInstance();

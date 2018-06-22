@@ -1,5 +1,6 @@
 package com.lab.sadba.loginparent.Remote;
 
+import com.lab.sadba.loginparent.Model.Bulletin;
 import com.lab.sadba.loginparent.Model.Enfant;
 import com.lab.sadba.loginparent.Model.Evaluation;
 import com.lab.sadba.loginparent.Model.InfoEtab;
@@ -60,4 +61,7 @@ public interface IMyAPI {
 
     @GET("notes_eleve/index.php")
     Observable<List<Note>> getNotes(@Query("ien") String ien);
+
+    @GET("info_bulletin/index.php")
+    Observable<List<Bulletin>> getBulletins(@Query("ien") String ien);
 }
