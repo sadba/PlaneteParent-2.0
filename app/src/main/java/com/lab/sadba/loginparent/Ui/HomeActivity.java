@@ -20,6 +20,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.lab.sadba.loginparent.AbscenceActivity;
 import com.lab.sadba.loginparent.Adapter.BulletinAdapter;
 import com.lab.sadba.loginparent.Adapter.EvalAdapter;
 import com.lab.sadba.loginparent.Adapter.TempsAdapter;
@@ -52,7 +53,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     private List<Temps> evals = new ArrayList<>();
     private List<Note> notes = new ArrayList<>();
     private List<Bulletin> bulletins = new ArrayList<>();
-    private CardView tempsCard, notesCard, evalCard, infosCard;
+    private CardView tempsCard, notesCard, evalCard, infosCard, abscenceCard;
     TextView persoTitle;
     RecyclerView recycler_bulletin;
 
@@ -73,6 +74,9 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         notesCard = findViewById(R.id.notes_card);
         evalCard = findViewById(R.id.eval_card);
         infosCard = findViewById(R.id.infos_card);
+        abscenceCard = findViewById(R.id.absc_retard);
+
+
         persoTitle = findViewById(R.id.prenom_toolbar);
 
         //Add Click Listener to the cards
@@ -80,8 +84,9 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         notesCard.setOnClickListener(this);
         evalCard.setOnClickListener(this);
         infosCard.setOnClickListener(this);
+        abscenceCard.setOnClickListener(this);
 
-        toolbar =  findViewById(R.id.toolbar);
+        toolbar =  findViewById(R.id.toolbarHome);
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
 
         ien = getIntent().getStringExtra("ien_enfant");
@@ -126,11 +131,12 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
         Realm.init(getApplicationContext());
         assert ien != null;
-        getBulletins(ien);
+
         if (isNetworkAvailable(this)) {
             getEmploi(ien);
             getInfos(ien);
             getNotes(ien);
+            getBulletins(ien);
 
         }
 
@@ -166,7 +172,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                                 }
                             });
                         } catch (Exception e){
-                            Toast.makeText(HomeActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(HomeActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                             realm.close();
                         }
 
@@ -366,6 +372,11 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                     i.putExtra("ien_bis", ien);
                     startActivity(i);
             break;
+            case R.id.absc_retard : i =
+                    new Intent(this, AbscenceActivity.class);
+                i.putExtra("ien_bis", ien);
+                startActivity(i);
+                break;
             default: break;
         }
     }

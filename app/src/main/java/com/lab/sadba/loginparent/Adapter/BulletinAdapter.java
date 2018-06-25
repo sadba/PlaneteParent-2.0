@@ -1,6 +1,7 @@
 package com.lab.sadba.loginparent.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 
 import com.lab.sadba.loginparent.Model.Bulletin;
 import com.lab.sadba.loginparent.R;
+import com.lab.sadba.loginparent.Webview;
 
 import java.util.List;
 
@@ -36,9 +38,21 @@ public class BulletinAdapter extends RecyclerView.Adapter<BulletinAdapter.Bullet
         Bulletin bulletin = bulletins.get(position);
         holder.setItemContent(bulletin);
 
+        holder.parent_layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, Webview.class);
+                String id_semestre = bulletin.getId_semestre();
+                intent.putExtra("id_semestre", id_semestre);
+                context.startActivity(intent);
+            }
+        });
 
 
 
+    }
+
+    private void openPdf() {
 
     }
 

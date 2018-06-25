@@ -12,14 +12,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Ui.MainActivity" android:windowSoftInputMode="stateHidden">
+        <activity
+            android:name=".Ui.MainActivity"
+            android:windowSoftInputMode="stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity android:name=".Ui.HomeActivity" />
         <activity
             android:name=".Ui.TestActivity"
@@ -32,9 +33,9 @@
         <activity android:name=".Ui.EvalActivity" />
         <activity android:name=".Ui.InfoEtabActivity" />
         <activity android:name=".InfosEleveActivity" />
-        <activity android:name=".SlideActivity">
-
-        </activity>
+        <activity android:name=".SlideActivity" />
+        <activity android:name=".Webview" />
+        <activity android:name=".AbscenceActivity"></activity>
     </application>
 
 </manifest>
