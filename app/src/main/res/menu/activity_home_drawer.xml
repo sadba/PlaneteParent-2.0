@@ -6,26 +6,32 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_camera"
+            android:icon="@drawable/ic_folder_shared_black_24dp"
             android:title="Dossier Eleve" />
         <item
             android:id="@+id/nav_gallery"
+            android:icon="@drawable/ic_transfer_within_a_station_black_24dp"
             android:title="Demande de Transfert" />
         <item
             android:id="@+id/nav_slideshow"
-            android:title="Slideshow" />
+            android:icon="@drawable/ic_people_black_24dp"
+            android:title="Liste des Enseignants" />
         <item
             android:id="@+id/nav_manage"
-            android:title="Tools" />
+            android:icon="@drawable/ic_contact_mail_black_24dp"
+            android:title="Contacter Chef Etablissement" />
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="Profil">
         <menu>
             <item
                 android:id="@+id/nav_share"
-                android:title="Share" />
+                android:icon="@drawable/ic_person_black_24dp"
+                android:title="Voir mon profil" />
             <item
                 android:id="@+id/nav_send"
-                android:title="Send" />
+                android:icon="@drawable/ic_close_black_24dp"
+                android:title="Se Déconnecter" />
         </menu>
     </item>
 
