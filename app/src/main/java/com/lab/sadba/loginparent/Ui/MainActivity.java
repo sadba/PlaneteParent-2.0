@@ -157,6 +157,13 @@ public class MainActivity extends AppCompatActivity {
                                                 editor.apply();
                                                 alertDialog.dismiss();
                                                 watingDialog.dismiss();
+                                               // VerifUser verifUser = new VerifUser();
+                                               // realm = Realm.getDefaultInstance();
+                                                //realm.copyToRealmOrUpdate(verifUser);
+                                                realm = Realm.getDefaultInstance();
+                                                realm.beginTransaction();
+                                                realm.copyToRealm(response.body());
+                                                realm.commitTransaction();
                                                 showRegisterDialog();
                                             }
 

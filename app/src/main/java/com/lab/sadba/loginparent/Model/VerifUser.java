@@ -4,8 +4,9 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
-public class VerifUser {
+public class VerifUser extends RealmObject{
 
     @SerializedName("code")
     @Expose
@@ -13,6 +14,7 @@ public class VerifUser {
     @SerializedName("message")
     @Expose
     private String message;
+    @PrimaryKey
     @SerializedName("ien_parent")
     @Expose
     private String ien_parent;

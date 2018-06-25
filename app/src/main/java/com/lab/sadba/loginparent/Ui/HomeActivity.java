@@ -35,6 +35,8 @@ import com.lab.sadba.loginparent.Model.Evaluation;
 import com.lab.sadba.loginparent.Model.InfosEleves;
 import com.lab.sadba.loginparent.Model.Note;
 import com.lab.sadba.loginparent.Model.Temps;
+import com.lab.sadba.loginparent.Model.User;
+import com.lab.sadba.loginparent.Model.VerifUser;
 import com.lab.sadba.loginparent.R;
 import com.lab.sadba.loginparent.Remote.ApiClient3;
 import com.lab.sadba.loginparent.Remote.IMyAPI;
@@ -59,7 +61,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     private List<Note> notes = new ArrayList<>();
     private List<Bulletin> bulletins = new ArrayList<>();
     private CardView tempsCard, notesCard, evalCard, infosCard, abscenceCard;
-    TextView persoTitle, txt_name, txt_phone;
+    TextView persoTitle, txt_name, txt_ien_parent;
     RecyclerView recycler_bulletin;
 
     //RxJava
@@ -82,6 +84,12 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         abscenceCard = findViewById(R.id.absc_retard);
 
         toolbar =  findViewById(R.id.toolbarHome);
+
+        ien = getIntent().getStringExtra("ien_enfant");
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString("ien_enfant", ien);
+        editor.apply();
         //toolbar.setNavigationIcon(R.drawable.ic_menu_black_24dp);
 
         //Drawer layout
@@ -96,8 +104,16 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
 
         View headerView = navigationView.getHeaderView(0);
-        //txt_name = headerView.findViewById(R.id.txt_name);
-        //txt_phone = headerView.findViewById(R.id.txt_phone);
+        txt_name = headerView.findViewById(R.id.txt_name_nav);
+        txt_ien_parent = headerView.findViewById(R.id.txt_ien_nav);
+
+        realm = Realm.getDefaultInstance();
+        VerifUser verifUser = realm.where(VerifUser.class).findFirst();
+        txt_name.setText(verifUser.getPrenom_parent() + " " + verifUser.getNom_parent());
+        txt_ien_parent.setText(verifUser.getIen_parent());
+        //SharedPreferences sharedPreferences1 = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+       // String value = sharedPreferences1.getString("ien_Parent", "");
+       // Toast.makeText(this, verifUser.getPrenom_parent(), Toast.LENGTH_SHORT).show();
 
 
         persoTitle = findViewById(R.id.prenom_toolbar);
@@ -111,11 +127,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
 
 
-        ien = getIntent().getStringExtra("ien_enfant");
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.putString("ien_enfant", ien);
-        editor.apply();
+
 
 
 
