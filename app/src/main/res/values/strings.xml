@@ -6,4 +6,11 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="slogan">Bienvenue dans Planete Parent. Cette application est dédiée aux parents d\'élèves soucieux de suivre le parcours scolaire de leurs enfants(Notes, Emploie du temps, Abscences etc...)</string>
     <string name="pas_de_bulletin_disponible_pour_le_moment">Pas de bulletin disponible pour le moment</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
 </resources>

@@ -6,4 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".AbscenceActivity">
 
+    <include
+        layout="@layout/toolbar_simple_layout"/>
+
 </android.support.constraint.ConstraintLayout>

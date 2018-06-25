@@ -9,13 +9,18 @@ import android.net.NetworkInfo;
 import android.os.Build;
 import android.preference.PreferenceManager;
 import android.support.annotation.RequiresApi;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -45,7 +50,7 @@ import io.reactivex.schedulers.Schedulers;
 import io.realm.Realm;
 import io.realm.RealmResults;
 
-public class HomeActivity extends AppCompatActivity implements View.OnClickListener{
+public class HomeActivity extends AppCompatActivity implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
 
     private String ien;
     android.support.v7.widget.Toolbar toolbar;
@@ -54,7 +59,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     private List<Note> notes = new ArrayList<>();
     private List<Bulletin> bulletins = new ArrayList<>();
     private CardView tempsCard, notesCard, evalCard, infosCard, abscenceCard;
-    TextView persoTitle;
+    TextView persoTitle, txt_name, txt_phone;
     RecyclerView recycler_bulletin;
 
     //RxJava
@@ -76,6 +81,24 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         infosCard = findViewById(R.id.infos_card);
         abscenceCard = findViewById(R.id.absc_retard);
 
+        toolbar =  findViewById(R.id.toolbarHome);
+        //toolbar.setNavigationIcon(R.drawable.ic_menu_black_24dp);
+
+        //Drawer layout
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
+
+        View headerView = navigationView.getHeaderView(0);
+        //txt_name = headerView.findViewById(R.id.txt_name);
+        //txt_phone = headerView.findViewById(R.id.txt_phone);
+
 
         persoTitle = findViewById(R.id.prenom_toolbar);
 
@@ -86,8 +109,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         infosCard.setOnClickListener(this);
         abscenceCard.setOnClickListener(this);
 
-        toolbar =  findViewById(R.id.toolbarHome);
-        toolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
+
 
         ien = getIntent().getStringExtra("ien_enfant");
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
@@ -114,7 +136,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
          toolbar.setTitle("Dashboard");
          persoTitle.setText(lettre+"."+nom);
 
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+        /*toolbar.setNavigationOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
@@ -122,7 +144,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 // Your code
                 finish();
             }
-        });
+        }); */
 
 
 
@@ -144,6 +166,41 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
 
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+    @SuppressWarnings("StatementWithEmptyBody")
+   // @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        // Handle navigation view item clicks here.
+        int id = item.getItemId();
+
+        if (id == R.id.nav_camera) {
+            // Handle the camera action
+        } else if (id == R.id.nav_gallery) {
+
+        } else if (id == R.id.nav_slideshow) {
+
+        } else if (id == R.id.nav_manage) {
+
+        } else if (id == R.id.nav_share) {
+
+        } else if (id == R.id.nav_send) {
+
+        }
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
     }
 
     private void getBulletins(String ien) {
@@ -403,5 +460,10 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             return false;
         }
         return status;
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+
     }
 }
