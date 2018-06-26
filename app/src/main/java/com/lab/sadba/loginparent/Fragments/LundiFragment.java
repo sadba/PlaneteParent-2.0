@@ -85,12 +85,6 @@ public class LundiFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_lundi, container, false);
         recycler_lundi = view.findViewById(R.id.recycler_temps);
 
-        //visible = view.findViewById(R.id.visibility_lundi);
-       // if (results.isEmpty()){
-            //visible.setVisibility(View.VISIBLE);
-        //}
-
-
         TempsAdapter adapter = new TempsAdapter(getContext(), temps);
         recycler_lundi.setLayoutManager(new LinearLayoutManager(getActivity()));
         recycler_lundi.setHasFixedSize(true);
@@ -99,27 +93,5 @@ public class LundiFragment extends Fragment {
         return view;
 
     }
-    public static boolean isNetworkAvailable(Context context) {
-        boolean status = false;
-        try {
-            ConnectivityManager cm = (ConnectivityManager) context
-                    .getSystemService(Context.CONNECTIVITY_SERVICE);
-            assert cm != null;
-            NetworkInfo netInfo = cm.getNetworkInfo(0);
 
-            if (netInfo != null
-                    && netInfo.getState() == NetworkInfo.State.CONNECTED) {
-                status = true;
-            } else {
-                netInfo = cm.getNetworkInfo(1);
-                if (netInfo != null
-                        && netInfo.getState() == NetworkInfo.State.CONNECTED)
-                    status = true;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-        return status;
-    }
 }

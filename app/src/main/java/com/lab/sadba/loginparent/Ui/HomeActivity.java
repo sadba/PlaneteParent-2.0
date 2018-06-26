@@ -22,6 +22,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.lab.sadba.loginparent.Model.Abscence;
 import com.lab.sadba.loginparent.Model.Bulletin;
 import com.lab.sadba.loginparent.Model.Enfant;
 import com.lab.sadba.loginparent.Model.InfosEleves;
@@ -159,6 +160,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             getInfos(ien);
             getNotes(ien);
             getBulletins(ien);
+            getAbscences(ien);
 
         }
 
@@ -166,6 +168,55 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
 
 
+    }
+
+    private void getAbscences(String ien) {
+        //realm = Realm.getDefaultInstance();
+        IMyAPI service = ApiClient3.getRetrofit().create(IMyAPI.class);
+        service.getAbscences(ien)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new DisposableObserver<List<Abscence>>() {
+                    @Override
+                    public void onNext(List<Abscence> abscences) {
+                        // realm = Realm.getDefaultInstance();
+                        //Toast.makeText(HomeActivity.this, String.valueOf(bulletins.size()), Toast.LENGTH_SHORT).show();
+
+                        try{
+                            realm = Realm.getDefaultInstance();
+                            realm.executeTransaction(realm1 -> {
+                                for (Abscence abscence: abscences){
+                                    Abscence abscence1 = new Abscence();
+                                    abscence1.setId_absence(abscence.getId_absence());
+                                    abscence1.setDate_absence(abscence.getDate_absence());
+                                    abscence1.setDiscipline(abscence.getDiscipline());
+                                    abscence1.setHeure_d(abscence.getHeure_d());
+                                    abscence1.setHeure_f(abscence.getHeure_f());
+                                    abscence1.setJour(abscence.getJour());
+                                    abscence1.setMotif(abscence.getMotif());
+
+
+                                    realm.copyToRealmOrUpdate(abscence1);
+                                }
+                            });
+                        } catch (Exception e){
+                            //Toast.makeText(HomeActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                            realm.close();
+                        }
+
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Toast.makeText(getApplicationContext(), "Veuillez vérifier votre connection internet", Toast.LENGTH_LONG).show();
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
     }
 
     @Override
