@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.lab.sadba.loginparent.Model.Bulletin;
 import com.lab.sadba.loginparent.R;
-import com.lab.sadba.loginparent.Webview;
+import com.lab.sadba.loginparent.Ui.Webview;
 
 import java.util.List;
 

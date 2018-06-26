@@ -1,4 +1,4 @@
-package com.lab.sadba.loginparent;
+package com.lab.sadba.loginparent.Ui;
 
 import android.content.Context;
 import android.content.SharedPreferences;

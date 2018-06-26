@@ -1,4 +1,4 @@
-package com.lab.sadba.loginparent;
+package com.lab.sadba.loginparent.Ui;
 
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -10,6 +10,7 @@ import android.view.View;
 import com.lab.sadba.loginparent.Adapter.ViewPagerAdapter;
 import com.lab.sadba.loginparent.Fragments.AbscenceFragment;
 import com.lab.sadba.loginparent.Fragments.RetardFragment;
+import com.lab.sadba.loginparent.R;
 
 public class AbscenceActivity extends AppCompatActivity {
 

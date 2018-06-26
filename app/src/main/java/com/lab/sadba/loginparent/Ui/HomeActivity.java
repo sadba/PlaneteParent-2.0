@@ -12,30 +12,21 @@ import android.support.annotation.RequiresApi;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.lab.sadba.loginparent.AbscenceActivity;
-import com.lab.sadba.loginparent.Adapter.BulletinAdapter;
-import com.lab.sadba.loginparent.Adapter.EvalAdapter;
-import com.lab.sadba.loginparent.Adapter.TempsAdapter;
 import com.lab.sadba.loginparent.Model.Bulletin;
 import com.lab.sadba.loginparent.Model.Enfant;
-import com.lab.sadba.loginparent.Model.Evaluation;
 import com.lab.sadba.loginparent.Model.InfosEleves;
 import com.lab.sadba.loginparent.Model.Note;
 import com.lab.sadba.loginparent.Model.Temps;
-import com.lab.sadba.loginparent.Model.User;
 import com.lab.sadba.loginparent.Model.VerifUser;
 import com.lab.sadba.loginparent.R;
 import com.lab.sadba.loginparent.Remote.ApiClient3;
@@ -45,12 +36,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.functions.Consumer;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 import io.realm.Realm;
-import io.realm.RealmResults;
 
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
 
