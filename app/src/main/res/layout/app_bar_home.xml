@@ -266,7 +266,7 @@
                         <ImageView
                             android:layout_width="64dp"
                             android:layout_height="64dp"
-                            android:background="@drawable/cerclebackgroundpink"
+                            android:background="@drawable/cerclebackgroundblue"
                             android:src="@drawable/ic_access_alarms_black_24dp"
                             android:padding="10dp"/>
                         <TextView
@@ -274,7 +274,7 @@
                             android:layout_height="wrap_content"
                             android:textStyle="bold"
                             android:layout_marginTop="5dp"
-                            android:text="Abscences | Retard"/>
+                            android:text="Abscences | Retards"/>
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
