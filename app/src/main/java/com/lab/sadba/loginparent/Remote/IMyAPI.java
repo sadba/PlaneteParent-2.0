@@ -11,6 +11,7 @@ import com.lab.sadba.loginparent.Model.PostRegisterUser;
 import com.lab.sadba.loginparent.Model.PostUser;
 import com.lab.sadba.loginparent.Model.PostVerifUser;
 import com.lab.sadba.loginparent.Model.RegisterUser;
+import com.lab.sadba.loginparent.Model.Retard;
 import com.lab.sadba.loginparent.Model.Temps;
 import com.lab.sadba.loginparent.Model.User;
 import com.lab.sadba.loginparent.Model.VerifUser;
@@ -68,4 +69,7 @@ public interface IMyAPI {
 
     @GET("absence-ien/index.php")
     Observable<List<Abscence>> getAbscences(@Query("ien") String ien);
+
+    @GET("retard-eleve/index.php")
+    Observable<List<Retard>> getRetards(@Query("ien") String ien);
 }

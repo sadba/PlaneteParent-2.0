@@ -8,19 +8,7 @@
     android:background="@drawable/background">
 
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Pas de devoir pour le moment"
-        android:textSize="25sp"
-        android:gravity="center"
-        android:paddingTop="300dp"
-        android:paddingLeft="100dp"
-        android:textStyle="bold"
-        android:visibility="gone"
-        android:id="@+id/visibility_compo"
 
-        />
 
 
 

@@ -9,6 +9,7 @@ import android.net.NetworkInfo;
 import android.os.Build;
 import android.preference.PreferenceManager;
 import android.support.annotation.RequiresApi;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -22,11 +23,13 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.lab.sadba.loginparent.DossierActivity;
 import com.lab.sadba.loginparent.Model.Abscence;
 import com.lab.sadba.loginparent.Model.Bulletin;
 import com.lab.sadba.loginparent.Model.Enfant;
 import com.lab.sadba.loginparent.Model.InfosEleves;
 import com.lab.sadba.loginparent.Model.Note;
+import com.lab.sadba.loginparent.Model.Retard;
 import com.lab.sadba.loginparent.Model.Temps;
 import com.lab.sadba.loginparent.Model.VerifUser;
 import com.lab.sadba.loginparent.R;
@@ -73,6 +76,9 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         abscenceCard = findViewById(R.id.absc_retard);
 
         toolbar =  findViewById(R.id.toolbarHome);
+
+        CollapsingToolbarLayout collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsingtoolbar);
+        collapsingToolbar.setTitle("DASHBOARD");
 
         ien = getIntent().getStringExtra("ien_enfant");
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
@@ -161,6 +167,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             getNotes(ien);
             getBulletins(ien);
             getAbscences(ien);
+            getRetards(ien);
 
         }
 
@@ -168,6 +175,55 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
 
 
+    }
+
+    private void getRetards(String ien) {
+        //realm = Realm.getDefaultInstance();
+        IMyAPI service = ApiClient3.getRetrofit().create(IMyAPI.class);
+        service.getRetards(ien)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new DisposableObserver<List<Retard>>() {
+                    @Override
+                    public void onNext(List<Retard> retards) {
+                        // realm = Realm.getDefaultInstance();
+                        //Toast.makeText(HomeActivity.this, String.valueOf(bulletins.size()), Toast.LENGTH_SHORT).show();
+
+                        try{
+                            realm = Realm.getDefaultInstance();
+                            realm.executeTransaction(realm1 -> {
+                                for (Retard retard: retards){
+                                    Retard retard1 = new Retard();
+                                    retard1.setId_retard(retard.getId_retard());
+                                    retard1.setDate_absence(retard.getDate_absence());
+                                    retard1.setDiscipline(retard.getDiscipline());
+                                    retard1.setDuree(retard.getDuree());
+                                    retard1.setHeure_debut_cours(retard.getHeure_debut_cours());
+                                    retard1.setJour(retard.getJour());
+                                    retard1.setMotif(retard.getMotif());
+
+
+                                    realm.copyToRealmOrUpdate(retard1);
+                                }
+                            });
+                        } catch (Exception e){
+                            //Toast.makeText(HomeActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                            realm.close();
+                        }
+
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Toast.makeText(getApplicationContext(), "Veuillez vérifier votre connection internet1", Toast.LENGTH_LONG).show();
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
     }
 
     private void getAbscences(String ien) {
@@ -209,7 +265,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
                     @Override
                     public void onError(Throwable e) {
-                        Toast.makeText(getApplicationContext(), "Veuillez vérifier votre connection internet", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Veuillez vérifier votre connection internet2", Toast.LENGTH_LONG).show();
                     }
 
                     @Override
@@ -235,9 +291,14 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.dossier_eleve) {
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+            Intent intent = new Intent(this, DossierActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.profil_parent) {
+            Intent intent = new Intent(this, DossierActivity.class);
+            startActivity(intent);
+
 
         } else if (id == R.id.nav_slideshow) {
 
@@ -289,7 +350,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
                     @Override
                     public void onError(Throwable e) {
-                        Toast.makeText(getApplicationContext(), "Veuillez vérifier votre connection internet", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Veuillez vérifier votre connection internet3", Toast.LENGTH_LONG).show();
                     }
 
                     @Override
@@ -335,7 +396,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
                     @Override
                     public void onError(Throwable e) {
-                        Toast.makeText(getApplicationContext(), "Veuillez vérifier votre connection internet", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Veuillez vérifier votre connection internet4", Toast.LENGTH_LONG).show();
                     }
 
                     @Override
@@ -391,7 +452,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
                     @Override
                     public void onError(Throwable e) {
-                        Toast.makeText(getApplicationContext(), "Veuillez vérifier votre connection internet", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Veuillez vérifier votre connection internet5", Toast.LENGTH_LONG).show();
                     }
 
                     @Override
@@ -442,7 +503,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
                     @Override
                     public void onError(Throwable e) {
-                        Toast.makeText(getApplicationContext(), "Veuillez vérifier votre connection internet", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Veuillez vérifier votre connection internet6", Toast.LENGTH_LONG).show();
                     }
 
                     @Override

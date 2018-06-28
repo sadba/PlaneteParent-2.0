@@ -40,7 +40,7 @@
                     android:textSize="20sp"
                     android:textStyle="bold"
                     android:text="Mathematiques"
-                    android:id="@+id/date_abscence"
+                    android:id="@+id/date_retard"
 
                     />
                 <TextView
@@ -61,7 +61,7 @@
                     android:textStyle="bold"
                     android:text="Mathematiques"
                     android:textAlignment="textEnd"
-                    android:id="@+id/discipline_abscence"
+                    android:id="@+id/discipline_retard"
                     android:gravity="end" />
 
             </LinearLayout>
@@ -77,7 +77,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="15sp"
-                    android:text="Heure debut :"
+                    android:text="Heure debut cours :"
                     />
                 <TextView
                     android:fontFamily="sans-serif-condensed"
@@ -86,7 +86,7 @@
                     android:textSize="20sp"
                     android:textStyle="bold"
                     android:text="Heure Debut"
-                    android:id="@+id/heure_d_abscence"
+                    android:id="@+id/heure_d_retard"
                     />
 
                 <TextView
@@ -95,7 +95,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="15sp"
-                    android:text="Heure fin :"
+                    android:text="Durée :"
                     android:layout_marginLeft="20dp"
                     />
 
@@ -107,7 +107,7 @@
                     android:textStyle="bold"
                     android:text="Heure Debut"
                     android:gravity="end"
-                    android:id="@+id/heure_f_abscence"
+                    android:id="@+id/duree_retard"
                     />
 
             </LinearLayout>
@@ -134,7 +134,7 @@
                     android:textStyle="bold"
                     android:text="Motif"
                     android:layout_marginLeft="20dp"
-                    android:id="@+id/motif_abscence"
+                    android:id="@+id/motif_retard"
                     />
             </LinearLayout>
         </LinearLayout>

@@ -23,7 +23,7 @@
             app:title="Planete Parent"
             app:expandedTitleMarginStart="48dp"
             app:expandedTitleMarginEnd="64dp"
-            android:background="@drawable/background_collapse"
+            android:background="@drawable/nav_test"
             >
 
 

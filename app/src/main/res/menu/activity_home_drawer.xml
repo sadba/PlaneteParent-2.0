@@ -5,11 +5,11 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_camera"
+            android:id="@+id/dossier_eleve"
             android:icon="@drawable/ic_folder_shared_black_24dp"
             android:title="Dossier Eleve" />
         <item
-            android:id="@+id/nav_gallery"
+            android:id="@+id/profil_parent"
             android:icon="@drawable/ic_transfer_within_a_station_black_24dp"
             android:title="Demande de Transfert" />
         <item
