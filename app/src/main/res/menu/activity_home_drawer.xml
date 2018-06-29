@@ -9,7 +9,7 @@
             android:icon="@drawable/ic_folder_shared_black_24dp"
             android:title="Dossier Eleve" />
         <item
-            android:id="@+id/profil_parent"
+            android:id="@+id/nav_sad"
             android:icon="@drawable/ic_transfer_within_a_station_black_24dp"
             android:title="Demande de Transfert" />
         <item
@@ -25,7 +25,7 @@
     <item android:title="Profil">
         <menu>
             <item
-                android:id="@+id/nav_share"
+                android:id="@+id/profil_parent"
                 android:icon="@drawable/ic_person_black_24dp"
                 android:title="Voir mon profil" />
             <item

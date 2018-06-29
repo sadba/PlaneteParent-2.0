@@ -294,16 +294,17 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             // Handle the camera action
             Intent intent = new Intent(this, DossierActivity.class);
             startActivity(intent);
-        } else if (id == R.id.profil_parent) {
-            Intent intent = new Intent(this, DossierActivity.class);
-            startActivity(intent);
+        } else if (id == R.id.nav_sad) {
+
 
 
         } else if (id == R.id.nav_slideshow) {
 
         } else if (id == R.id.nav_manage) {
 
-        } else if (id == R.id.nav_share) {
+        } else if (id == R.id.profil_parent) {
+            Intent intent = new Intent(this, ProfilParentActivity.class);
+            startActivity(intent);
 
         } else if (id == R.id.nav_send) {
 

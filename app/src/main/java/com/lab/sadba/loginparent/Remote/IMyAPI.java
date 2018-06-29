@@ -3,6 +3,7 @@ package com.lab.sadba.loginparent.Remote;
 import com.lab.sadba.loginparent.Model.Abscence;
 import com.lab.sadba.loginparent.Model.Bulletin;
 import com.lab.sadba.loginparent.Model.Enfant;
+import com.lab.sadba.loginparent.Model.Enseignant;
 import com.lab.sadba.loginparent.Model.Evaluation;
 import com.lab.sadba.loginparent.Model.InfoEtab;
 import com.lab.sadba.loginparent.Model.InfosEleves;
@@ -72,4 +73,7 @@ public interface IMyAPI {
 
     @GET("retard-eleve/index.php")
     Observable<List<Retard>> getRetards(@Query("ien") String ien);
+
+    @GET("enseigants_eleve/index.php")
+    Observable<List<Enseignant>> getEnseignants(@Query("ien") String ien);
 }
