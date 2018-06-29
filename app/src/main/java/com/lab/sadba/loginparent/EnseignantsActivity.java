@@ -92,7 +92,7 @@ public class EnseignantsActivity extends AppCompatActivity {
 
                     @Override
                     public void onError(Throwable e) {
-                        Toast.makeText(getApplicationContext(), "Veuillez vérifier votre connection internet1", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Veuillez vérifier votre connection internet Enseignants", Toast.LENGTH_LONG).show();
                     }
 
                     @Override
