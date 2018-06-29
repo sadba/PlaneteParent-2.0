@@ -36,8 +36,8 @@
         <activity android:name=".SlideActivity" />
         <activity android:name=".Ui.Webview" />
         <activity android:name=".Ui.AbscenceActivity" />
-        <activity android:name=".DossierActivity" />
-        <activity android:name=".ProfilParentActivity"></activity>
+        <activity android:name=".Ui.DossierActivity" />
+        <activity android:name=".Ui.ProfilParentActivity"></activity>
     </application>
 
 </manifest>

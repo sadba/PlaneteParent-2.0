@@ -1,4 +1,4 @@
-package com.lab.sadba.loginparent;
+package com.lab.sadba.loginparent.Ui;
 
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.lab.sadba.loginparent.Model.Enfant;
+import com.lab.sadba.loginparent.R;
 
 import io.realm.Realm;
 

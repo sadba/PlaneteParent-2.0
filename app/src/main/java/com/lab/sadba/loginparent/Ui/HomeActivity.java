@@ -23,7 +23,6 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.lab.sadba.loginparent.DossierActivity;
 import com.lab.sadba.loginparent.Model.Abscence;
 import com.lab.sadba.loginparent.Model.Bulletin;
 import com.lab.sadba.loginparent.Model.Enfant;
