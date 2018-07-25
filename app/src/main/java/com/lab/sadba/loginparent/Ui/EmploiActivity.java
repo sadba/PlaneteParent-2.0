@@ -81,7 +81,7 @@ public class EmploiActivity extends AppCompatActivity {
     }
 
     private void getEmploi(String ien) {
-        realm = Realm.getDefaultInstance();
+        //realm = Realm.getDefaultInstance();
         IMyAPI service = ApiClient3.getRetrofit().create(IMyAPI.class);
         service.getTemps(ien)
                 .observeOn(AndroidSchedulers.mainThread())
@@ -89,7 +89,7 @@ public class EmploiActivity extends AppCompatActivity {
                 .subscribe(new DisposableObserver<List<Temps>>() {
                     @Override
                     public void onNext(List<Temps> temps) {
-                        realm = Realm.getDefaultInstance();
+                       // realm = Realm.getDefaultInstance();
                         //Toast.makeText(EmploiActivity.this, String.valueOf(temps.size()), Toast.LENGTH_SHORT).show();
 
                         try{

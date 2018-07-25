@@ -123,7 +123,7 @@ public class EnfantActivity extends AppCompatActivity {
         Observable<List<Enfant>> dbObservable =  Observable.create(e -> getDBEnfants());
 
         if (isNetworkAvailable(getApplicationContext())){
-            api.getEnfants(user.getIen())
+            api.getEnfants(user.getIen_parent())
                     .subscribeOn(Schedulers.io())
                     .observeOn(Schedulers.computation())
                     .map(enfants ->{

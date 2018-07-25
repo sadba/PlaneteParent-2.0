@@ -52,6 +52,7 @@ public class InfosEleveActivity extends AppCompatActivity {
             infos = realm.copyFromRealm(results);
 
         }
+        realm.close();
     }
 
     private void getInfos(String value) {

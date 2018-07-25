@@ -50,6 +50,9 @@ dependencies {
     implementation 'com.jakewharton.retrofit:retrofit2-rxjava2-adapter:1.0.0'
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
 
+    // glide
+    implementation 'com.github.bumptech.glide:glide:3.7.0'
+
     implementation 'info.hoang8f:fbutton:1.0.5'
 
 

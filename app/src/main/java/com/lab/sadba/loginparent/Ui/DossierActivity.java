@@ -43,6 +43,7 @@ public class DossierActivity extends AppCompatActivity {
         Enfant enfant = realm.where(Enfant.class).equalTo("ien_eleve" ,value).findFirst();
         String prenom = enfant.getPrenom_eleve();
         String nom = enfant.getNom_eleve();
+        realm.close();
 
 
 

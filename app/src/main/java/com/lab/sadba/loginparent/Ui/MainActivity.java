@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
                 if (TextUtils.isEmpty(password)){
                     edt_password.setError("Mot de passe ne pas etre vide");
                 } else if (TextUtils.isEmpty(ien)){
-                    edt_ien.setError("Ien ne doit pas etre vide");
+                    edt_ien.setError("Ien ne doit pas être vide");
                 } else {
                     authenticateUser(ien, password);
                     edt_ien.getText().clear();
@@ -330,6 +330,7 @@ public class MainActivity extends AppCompatActivity {
                             realm.beginTransaction();
                             realm.copyToRealm(response.body());
                             realm.commitTransaction();
+                            realm.close();
 
                         }
 

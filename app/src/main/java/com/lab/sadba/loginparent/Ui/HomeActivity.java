@@ -152,7 +152,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             }
         }); */
 
-
+        realm.close();
 
 
 
@@ -363,7 +363,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
 
     private void getNotes(String ien) {
-        realm = Realm.getDefaultInstance();
+       // realm = Realm.getDefaultInstance();
         IMyAPI service = ApiClient3.getRetrofit().create(IMyAPI.class);
         service.getNotes(ien)
                 .observeOn(AndroidSchedulers.mainThread())
@@ -371,7 +371,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 .subscribe(new DisposableObserver<List<Note>>() {
                     @Override
                     public void onNext(List<Note> notes) {
-                        realm = Realm.getDefaultInstance();
+                        //realm = Realm.getDefaultInstance();
                         //Toast.makeText(HomeActivity.this, String.valueOf(notes.size()), Toast.LENGTH_SHORT).show();
 
                         try{
@@ -408,7 +408,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
     @SuppressLint("CheckResult")
     private void getEmploi(String ien) {
-        realm = Realm.getDefaultInstance();
+       // realm = Realm.getDefaultInstance();
         IMyAPI service = ApiClient3.getRetrofit().create(IMyAPI.class);
         service.getTemps(ien)
                 .observeOn(AndroidSchedulers.mainThread())
@@ -416,7 +416,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 .subscribeWith(new DisposableObserver<List<Temps>>() {
                     @Override
                     public void onNext(List<Temps> temps) {
-                        realm = Realm.getDefaultInstance();
+                        //realm = Realm.getDefaultInstance();
 
                         try{
                             realm = Realm.getDefaultInstance();
@@ -464,7 +464,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void getInfos(String ien) {
-        realm = Realm.getDefaultInstance();
+        //realm = Realm.getDefaultInstance();
         IMyAPI service = ApiClient3.getRetrofit().create(IMyAPI.class);
         service.getInfosEleves(ien)
                 .observeOn(AndroidSchedulers.mainThread())
@@ -472,7 +472,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 .subscribe(new DisposableObserver<List<InfosEleves>>() {
                     @Override
                     public void onNext(List<InfosEleves> infos) {
-                        realm = Realm.getDefaultInstance();
+                        //realm = Realm.getDefaultInstance();
 
                         try{
                             realm = Realm.getDefaultInstance();

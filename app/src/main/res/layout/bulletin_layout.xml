@@ -27,11 +27,11 @@
 
     <ImageView
         android:id="@+id/pdf_image"
-        android:layout_width="80dp"
-        android:layout_height="100dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginLeft="16dp"
-        android:src="@drawable/pdf_flat"/>
+        android:src="@drawable/ereader"/>
 
     <TextView
         android:id="@+id/txt_bulletin"

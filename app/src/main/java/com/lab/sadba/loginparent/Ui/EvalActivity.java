@@ -90,6 +90,7 @@ public class EvalActivity extends AppCompatActivity {
             recyclerVIewEval.setItemAnimator(new DefaultItemAnimator());
             //recycler_lundi.setItemAnimator();
             recyclerVIewEval.setAdapter(adapter);
+            realm.close();
 
         }
 }
@@ -103,7 +104,7 @@ public class EvalActivity extends AppCompatActivity {
                 .subscribe(new DisposableObserver<List<Evaluation>>() {
                     @Override
                     public void onNext(List<Evaluation> evals) {
-                        realm = Realm.getDefaultInstance();
+                        //realm = Realm.getDefaultInstance();
                         //Toast.makeText(EvalActivity.this, String.valueOf(evals.size()), Toast.LENGTH_SHORT).show();
 
                         try{

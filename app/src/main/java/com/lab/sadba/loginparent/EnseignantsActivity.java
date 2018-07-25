@@ -53,6 +53,7 @@ public class EnseignantsActivity extends AppCompatActivity {
         recycler_enseignants.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         recycler_enseignants.setHasFixedSize(true);
         recycler_enseignants.setAdapter(adapter);
+        realm.close();
 
     }
 
@@ -101,4 +102,12 @@ public class EnseignantsActivity extends AppCompatActivity {
                     }
                 });
     }
+
+    @Override
+    protected void onStop() {
+       // realm.close();
+        super.onStop();
+    }
+
+
 }
