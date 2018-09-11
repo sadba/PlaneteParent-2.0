@@ -298,7 +298,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void gotToHomeActivity() {
-        Intent i = new Intent(this, EnfantActivity.class);
+        Intent i = new Intent(this, HomeActivity.class);
         startActivity(i);
     }
 
@@ -317,15 +317,8 @@ public class MainActivity extends AppCompatActivity {
                         if (result.getCode().equals("1")) {
                             Toast.makeText(MainActivity.this, result.getMessage(), Toast.LENGTH_LONG).show();
                         } else {
-                            //startActivity(new Intent(MainActivity.this, EnfantActivity.class));
-
                             gotToHomeActivity();
                             sp.edit().putBoolean("logged", true).apply();
-                            //SharedPreferences.Editor editor = sp.edit();
-                            //editor.remove("logged");
-                           // editor.commit();
-                            //finish();
-                            //sp1.edit().putString("ien_parent", "").apply();
                             realm = Realm.getDefaultInstance();
                             realm.beginTransaction();
                             realm.copyToRealm(response.body());

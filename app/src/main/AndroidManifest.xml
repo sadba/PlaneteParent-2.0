@@ -14,26 +14,24 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".Ui.MainActivity"
-            android:windowSoftInputMode="stateHidden">
+            android:windowSoftInputMode="stateHidden"
+            android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Ui.HomeActivity" />
-        <activity
-            android:name=".Ui.TestActivity"
-            android:label="@string/title_activity_test"
-            android:theme="@style/AppTheme" />
-        <activity android:name=".Ui.EnfantActivity" />
+        <activity android:name=".Ui.HomeActivity"
+            />
+
+
         <activity android:name=".Ui.MenuActivity" />
         <activity android:name=".Ui.EmploiActivity" />
         <activity android:name=".Ui.NoteActivity" />
         <activity android:name=".Ui.EvalActivity" />
         <activity android:name=".Ui.InfoEtabActivity" />
         <activity android:name=".Ui.InfosEleveActivity" />
-        <activity android:name=".SlideActivity" />
         <activity android:name=".Ui.Webview" />
         <activity android:name=".Ui.AbscenceActivity" />
         <activity android:name=".Ui.DossierActivity" />

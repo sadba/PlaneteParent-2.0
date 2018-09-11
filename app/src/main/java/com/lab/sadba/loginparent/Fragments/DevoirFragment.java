@@ -67,6 +67,7 @@ public class DevoirFragment extends Fragment {
         realm = Realm.getDefaultInstance();
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
         value = sharedPreferences.getString("ien_enfant", "");
+        Toast.makeText(getContext(), value, Toast.LENGTH_SHORT).show();
 
 
 
