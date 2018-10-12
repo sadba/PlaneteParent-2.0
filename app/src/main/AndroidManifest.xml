@@ -26,6 +26,7 @@
             />
 
 
+
         <activity android:name=".Ui.MenuActivity" />
         <activity android:name=".Ui.EmploiActivity" />
         <activity android:name=".Ui.NoteActivity" />

@@ -74,6 +74,6 @@ public interface IMyAPI {
     @GET("retard-eleve/index.php")
     Observable<List<Retard>> getRetards(@Query("ien") String ien);
 
-    @GET("enseigants_eleve/index.php")
+    @GET("liste_enseignant_classe/index.php")
     Observable<List<Enseignant>> getEnseignants(@Query("ien") String ien);
 }
