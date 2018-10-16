@@ -34,6 +34,7 @@
                     android:text="Discipline :"
                     />
                 <TextView
+                    android:textColor="#000"
                     android:fontFamily="sans-serif-condensed"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -60,6 +61,7 @@
                     android:text="Date evaluation :"
                     />
                 <TextView
+                    android:textColor="#000"
                     android:fontFamily="sans-serif-condensed"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -86,6 +88,7 @@
                     />
 
                 <TextView
+                    android:textColor="#000"
                     android:fontFamily="sans-serif-condensed"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

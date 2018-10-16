@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/background"
     tools:context=".Ui.HomeActivity">
 
     <android.support.design.widget.AppBarLayout
@@ -39,15 +38,15 @@
                 android:id="@+id/toolbarHome"
                 >
 
-                <TextView
+                <Spinner
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Prenom"
                     android:layout_gravity="right"
                     android:textStyle="bold"
-                    android:layout_marginTop="-35dp"
-                    android:paddingRight="10dp"
-                    android:id="@+id/prenom_toolbar"/>
+                    android:layout_marginTop="-45dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="-13dp"
+                    android:id="@+id/spinner_enfants"/>
 
             </android.support.v7.widget.Toolbar>
 

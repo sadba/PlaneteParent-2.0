@@ -112,6 +112,7 @@ public class EnfantActivity extends AppCompatActivity {
                 .getIMyAPI();
 
         User user = realm.where(User.class).findFirst();
+        Toast.makeText(this, user.getIen(), Toast.LENGTH_SHORT).show();
 
         Enfant enf = new Enfant();
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
@@ -123,7 +124,11 @@ public class EnfantActivity extends AppCompatActivity {
         Observable<List<Enfant>> dbObservable =  Observable.create(e -> getDBEnfants());
 
         if (isNetworkAvailable(getApplicationContext())){
+<<<<<<< HEAD
             api.getEnfants(user.getIen_parent())
+=======
+            api.getEnfants("W6WDBX5Q")
+>>>>>>> 4a38d76fba2d60354b921786b0343470cec56164
                     .subscribeOn(Schedulers.io())
                     .observeOn(Schedulers.computation())
                     .map(enfants ->{

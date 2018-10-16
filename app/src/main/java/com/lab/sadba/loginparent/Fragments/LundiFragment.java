@@ -58,9 +58,11 @@ public class LundiFragment extends Fragment {
         realm = Realm.getDefaultInstance();
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
         value = sharedPreferences.getString("ien_enfant", "");
+        Toast.makeText(getContext(), value, Toast.LENGTH_SHORT).show();
 
         InfosEleves infosEleves = realm.where(InfosEleves.class).equalTo("ien" ,value).findFirst();
         String code_classe = infosEleves.getCode_classe();
+        realm.close();
 
         realm = Realm.getDefaultInstance();
         results = realm.where(Temps.class)

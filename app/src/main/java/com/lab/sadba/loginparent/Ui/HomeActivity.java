@@ -17,12 +17,20 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.lab.sadba.loginparent.Adapter.EnfantAdapter;
+import com.lab.sadba.loginparent.Adapter.EnfantSpinnerAdapter;
+import com.lab.sadba.loginparent.EnseignantsActivity;
 import com.lab.sadba.loginparent.Model.Abscence;
 import com.lab.sadba.loginparent.Model.Bulletin;
 import com.lab.sadba.loginparent.Model.Enfant;
@@ -32,16 +40,20 @@ import com.lab.sadba.loginparent.Model.Retard;
 import com.lab.sadba.loginparent.Model.Temps;
 import com.lab.sadba.loginparent.Model.VerifUser;
 import com.lab.sadba.loginparent.R;
+import com.lab.sadba.loginparent.Remote.ApiClient;
 import com.lab.sadba.loginparent.Remote.ApiClient3;
+import com.lab.sadba.loginparent.Remote.ApiClient5;
 import com.lab.sadba.loginparent.Remote.IMyAPI;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 import io.realm.Realm;
+import io.realm.RealmResults;
 
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
 
@@ -54,11 +66,13 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     private CardView tempsCard, notesCard, evalCard, infosCard, abscenceCard;
     TextView persoTitle, txt_name, txt_ien_parent;
     RecyclerView recycler_bulletin;
+    private List<Enfant>enfantsSpinner = new ArrayList<>();
+    private RealmResults<Enfant> resultsEnfants;
+    Spinner spinner;
 
-    //RxJava
-   // CompositeDisposable compositeDisposable = new CompositeDisposable();
 
-    IMyAPI mService;
+
+
 
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -76,15 +90,12 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
         toolbar =  findViewById(R.id.toolbarHome);
 
+
+
         CollapsingToolbarLayout collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsingtoolbar);
         collapsingToolbar.setTitle("DASHBOARD");
 
-        ien = getIntent().getStringExtra("ien_enfant");
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.putString("ien_enfant", ien);
-        editor.apply();
-        //toolbar.setNavigationIcon(R.drawable.ic_menu_black_24dp);
+
 
         //Drawer layout
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -98,13 +109,45 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
 
         View headerView = navigationView.getHeaderView(0);
-        txt_name = headerView.findViewById(R.id.txt_name_nav);
+        //txt_name = headerView.findViewById(R.id.txt_name_nav);
+        spinner = findViewById(R.id.spinner_enfants);
+        realm = Realm.getDefaultInstance();
+        resultsEnfants = realm.where(Enfant.class).findAll();
+        enfantsSpinner = realm.copyFromRealm(resultsEnfants);
+        realm.close();
+       Toast.makeText(this, String.valueOf(enfantsSpinner.size()), Toast.LENGTH_LONG).show();
+        EnfantSpinnerAdapter enfantSpinnerAdapter = new EnfantSpinnerAdapter(getApplicationContext(), R.layout.enfants_item, enfantsSpinner);
+        spinner.setAdapter(enfantSpinnerAdapter);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                Enfant enfantsClick = (Enfant) adapterView.getItemAtPosition(i);
+                ien = enfantsClick.getIen_eleve();
+                String code_classe = enfantsClick.getId_etablissement();
+                SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.putString("ien_enfant", ien);
+                editor.putString("code_classe", code_classe);
+                // editor.putString("code_etab", enf.getId_etablissement());
+                editor.apply();
+                //Toast.makeText(HomeActivity.this, ien, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        getEnfants(ien);
+
+
         txt_ien_parent = headerView.findViewById(R.id.txt_ien_nav);
 
         realm = Realm.getDefaultInstance();
         VerifUser verifUser = realm.where(VerifUser.class).findFirst();
-        txt_name.setText(verifUser.getPrenom_parent() + " " + verifUser.getNom_parent());
-        txt_ien_parent.setText(verifUser.getIen_parent());
+        //txt_name.setText(verifUser.getPrenom_parent() + " " + verifUser.getNom_parent());
+        //txt_ien_parent.setText(verifUser.getIen_parent());
         //SharedPreferences sharedPreferences1 = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
        // String value = sharedPreferences1.getString("ien_Parent", "");
        // Toast.makeText(this, verifUser.getPrenom_parent(), Toast.LENGTH_SHORT).show();
@@ -128,19 +171,20 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         realm = Realm.getDefaultInstance();
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         //String value = sharedPreferences.getString("ien_enfant", "");
-        Enfant enfant = realm.where(Enfant.class).equalTo("ien_eleve" ,ien).findFirst();
-        String prenom = enfant.getPrenom_eleve();
-        String nom = enfant.getNom_eleve();
+       // Enfant enfant = realm.where(Enfant.class).equalTo("ien_eleve" ,ien).findFirst();
+       // String prenom = enfant.getPrenom_eleve();
+        //String nom = enfant.getNom_eleve();
 
-        String lettre = prenom.substring(0,1);
+       // String lettre = prenom.substring(0,1);
 
        // InfosEleves infosEleves = realm.where(InfosEleves.class).findFirst();
        // String code_classe = infosEleves.getCode_classe();
 
        //Toast.makeText(this, code_classe, Toast.LENGTH_SHORT).show();
 
-         toolbar.setTitle("Dashboard");
-         persoTitle.setText(lettre+"."+nom);
+        // toolbar.setTitle("Dashboard");
+         //persoTitle.setText(lettre+"."+nom);
+         realm.close();
 
         /*toolbar.setNavigationOnClickListener(new View.OnClickListener() {
 
@@ -176,6 +220,70 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
+    private void getEnfants(String ien) {
+
+        //realm = Realm.getDefaultInstance();
+        IMyAPI service = ApiClient5.getRetrofit().create(IMyAPI.class);
+        service.getEnfants("W6WDBX5Q")
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new DisposableObserver<List<Enfant>>() {
+                    @Override
+                    public void onNext(List<Enfant> enfants) {
+                        // realm = Realm.getDefaultInstance();
+                        //Toast.makeText(HomeActivity.this, String.valueOf(bulletins.size()), Toast.LENGTH_SHORT).show();
+
+                        try{
+                            realm = Realm.getDefaultInstance();
+                            realm.executeTransaction(realm1 -> {
+                                for (Enfant enfant: enfants){
+                                    Enfant enfant1 = new Enfant();
+                                    enfant1.setCode(enfant.getCode());
+                                    enfant1.setMessage(enfant.getMessage());
+                                    enfant1.setType_affiliation(enfant.getType_affiliation());
+                                    enfant1.setDate_naiss_eleve(enfant.getDate_naiss_eleve());
+                                    enfant1.setSexe_eleve(enfant.getSexe_eleve());
+                                    enfant1.setPrenom_eleve(enfant.getPrenom_eleve());
+                                    enfant1.setNom_eleve(enfant.getNom_eleve());
+                                    enfant1.setLieu_naiss_eleve(enfant.getLieu_naiss_eleve());
+                                    enfant1.setLibelle_etablissement(enfant.getLibelle_etablissement());
+                                    enfant1.setLibelle_cycle(enfant.getLibelle_cycle());
+                                    enfant1.setIen_eleve(enfant.getIen_eleve());
+                                    enfant1.setId_parent(enfant.getId_parent());
+                                    enfant1.setId_niveau(enfant.getId_niveau());
+                                    enfant1.setId_etablissement(enfant.getId_etablissement());
+                                    enfant1.setId_cycle(enfant.getId_cycle());
+                                    enfant1.setLibelle_niveau(enfant.getLibelle_niveau());
+
+
+                                    realm.copyToRealmOrUpdate(enfant1);
+                                    realm.close();
+                                }
+                            });
+                        } catch (Exception e){
+                            //Toast.makeText(HomeActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                            realm.close();
+                        }
+
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        // Toast.makeText(getApplicationContext(), "Veuillez vérifier votre connection internet1", Toast.LENGTH_LONG).show();
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+
+    }
+
+
+
+
     private void getRetards(String ien) {
         //realm = Realm.getDefaultInstance();
         IMyAPI service = ApiClient3.getRetrofit().create(IMyAPI.class);
@@ -203,6 +311,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
 
                                     realm.copyToRealmOrUpdate(retard1);
+                                    realm.close();
                                 }
                             });
                         } catch (Exception e){
@@ -215,7 +324,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
                     @Override
                     public void onError(Throwable e) {
-                        Toast.makeText(getApplicationContext(), "Veuillez vérifier votre connection internet1", Toast.LENGTH_LONG).show();
+                       // Toast.makeText(getApplicationContext(), "Veuillez vérifier votre connection internet1", Toast.LENGTH_LONG).show();
                     }
 
                     @Override
@@ -264,7 +373,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
                     @Override
                     public void onError(Throwable e) {
-                        Toast.makeText(getApplicationContext(), "Veuillez vérifier votre connection internet2", Toast.LENGTH_LONG).show();
+                        //Toast.makeText(getApplicationContext(), "Veuillez vérifier votre connection internet2", Toast.LENGTH_LONG).show();
                     }
 
                     @Override
@@ -276,12 +385,19 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onBackPressed() {
+
+
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
         }
+
+
+
+
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
@@ -299,6 +415,9 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
 
         } else if (id == R.id.nav_slideshow) {
+            // Handle the camera action
+            Intent intent = new Intent(this, EnseignantsActivity.class);
+            startActivity(intent);
 
         } else if (id == R.id.nav_manage) {
 
@@ -350,7 +469,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
                     @Override
                     public void onError(Throwable e) {
-                        Toast.makeText(getApplicationContext(), "Veuillez vérifier votre connection internet3", Toast.LENGTH_LONG).show();
+                        //Toast.makeText(getApplicationContext(), "Veuillez vérifier votre connection internet3", Toast.LENGTH_LONG).show();
                     }
 
                     @Override
@@ -396,7 +515,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
                     @Override
                     public void onError(Throwable e) {
-                        Toast.makeText(getApplicationContext(), "Veuillez vérifier votre connection internet4", Toast.LENGTH_LONG).show();
+                        //Toast.makeText(getApplicationContext(), "Veuillez vérifier votre connection internet4", Toast.LENGTH_LONG).show();
                     }
 
                     @Override
@@ -452,7 +571,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
                     @Override
                     public void onError(Throwable e) {
-                        Toast.makeText(getApplicationContext(), "Veuillez vérifier votre connection internet5", Toast.LENGTH_LONG).show();
+                        //Toast.makeText(getApplicationContext(), "Veuillez vérifier votre connection internet5", Toast.LENGTH_LONG).show();
                     }
 
                     @Override
@@ -503,7 +622,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
                     @Override
                     public void onError(Throwable e) {
-                        Toast.makeText(getApplicationContext(), "Veuillez vérifier votre connection internet6", Toast.LENGTH_LONG).show();
+                        //Toast.makeText(getApplicationContext(), "Veuillez vérifier votre connection internet6", Toast.LENGTH_LONG).show();
                     }
 
                     @Override

@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.lab.sadba.loginparent.Adapter.EnseignantAdapter;
 import com.lab.sadba.loginparent.Model.Enseignant;
@@ -32,11 +33,28 @@ public class EnseignantsActivity extends AppCompatActivity {
     private RecyclerView recycler_enseignants;
 
     private RealmResults<Enseignant> results;
+    android.support.v7.widget.Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enseignants);
+
+        toolbar =  findViewById(R.id.toolbar_emploi);
+        toolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
+
+
+        toolbar.setTitle("Liste des Enseignants");
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+
+                // Your code
+                finish();
+            }
+        });
 
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
